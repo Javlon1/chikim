@@ -1,0 +1,146 @@
+@import "../../../assets/variables";
+// FCFCFD
+.footer {
+    height: 70px;
+    display: flex;
+    align-items: center;
+    background-color: #FCFCFD;
+
+    &__nav {
+        position: relative;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        &__list {
+            width: 320px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            &__item {
+                position: relative;
+                width: 70px;
+                z-index: 1;
+
+                &__link {
+                    position: relative;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    flex-direction: column;
+                    width: 100%;
+                    text-align: center;
+                    font-weight: 500;
+
+                    &__icon {
+                        position: relative;
+                        display: block;
+                        font-size: 1.5rem;
+                        text-align: center;
+                        line-height: 20px;
+                        transition: .5s;
+                        color: #131117;
+                    }
+
+                    &__text {
+                        margin-top: .5rem;
+                        font-size: 12px;
+                        font-weight: 500;
+                        line-height: 16px;
+                        color: #AEABC2;
+                        transition: .5s;
+                    }
+                }
+
+                &.active {
+
+                    .footer__nav__list__item__link__text {
+                        color: #6347EB;
+                    }
+
+                    .footer__nav__list__item__link__icon {
+                        transform: translateY(-1.2rem);
+                        color: $white;
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+.indicator {
+    position: absolute;
+    top: -35px;
+    width: 65px;
+    height: 65px;
+    background-color: #6347EB;
+    border-radius: 50%;
+    border: .5rem solid $white;
+    transition: .5s;
+
+    &::before {
+        content: "";
+        position: absolute;
+        top: 43%;
+        left: -30.8px;
+        width: 24px;
+        height: 30px;
+        background-color: transparent;
+        border-top-right-radius: 50%;
+        box-shadow: 0 -20px 0 0 $white;
+    }
+
+    &::after {
+        content: "";
+        position: absolute;
+        top: 43%;
+        right: -30.8px;
+        width: 24px;
+        height: 30px;
+        background-color: transparent;
+        border-top-left-radius: 50%;
+        box-shadow: 0 -20px 0 0 $white;
+    }
+}
+
+.footer__nav__list__item:nth-child(1).active~.indicator {
+    transform: translateX(calc(-.1rem));
+}
+
+.footer__nav__list__item:nth-child(2).active~.indicator {
+    transform: translateX(calc(63px * 1));
+}
+
+.footer__nav__list__item:nth-child(3).active~.indicator {
+    transform: translateX(calc(63.5px * 2));
+}
+
+.footer__nav__list__item:nth-child(4).active~.indicator {
+    transform: translateX(calc(63px * 3));
+}
+
+.footer__nav__list__item:nth-child(5).active~.indicator {
+    transform: translateX(calc(64px * 4));
+}
+
+
+.footerSkeleton {
+    border-radius: .4rem;
+    width: 70px;
+    height: 25px;
+    opacity: .7;
+    animation: footerSkeleton-loading 1s linear infinite alternate;
+}
+
+@keyframes footerSkeleton-loading {
+    0% {
+        background-color: hsl(200, 20%, 70%);
+    }
+
+    100% {
+        background-color: hsl(200, 20%, 95%);
+    }
+}
