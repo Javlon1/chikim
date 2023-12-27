@@ -19,6 +19,7 @@ const LogIn = () => {
             setOTP(newOTP);
         }
     };
+    console.log(otp.join(""));
 
     return (
         <div className={styles.logIn}>
@@ -43,7 +44,7 @@ const LogIn = () => {
                                 ))
                             }
                         </div>
-                        <button className={styles.logIn__items__form__btn}>Davom etish</button>
+                        <button  className={styles.logIn__items__form__btn}>Davom etish</button>
                     </form>
                 </div>
             </MyContainer>
