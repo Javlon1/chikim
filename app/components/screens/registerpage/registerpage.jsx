@@ -37,13 +37,14 @@ const RegisterPage = () => {
             setErrors(validationErrors);
             return;
         }
-        
-        router.push('/general');
-        
+
+        router.push('/login');
+
         console.log(formData);
     };
+
     return (
-        <section className={styles.registerPage}>
+        <div className={styles.registerPage}>
             <MyContainer>
                 <div className={styles.registerPage__items}>
                     <Image src={registerImg} alt="" priority />
@@ -78,7 +79,7 @@ const RegisterPage = () => {
                     </form>
                 </div>
             </MyContainer>
-        </section>
+        </div>
     )
 }
 

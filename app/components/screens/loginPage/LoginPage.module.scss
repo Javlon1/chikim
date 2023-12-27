@@ -1,0 +1,42 @@
+.loginPage {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background-color: #fff;
+    position: relative;
+    overflow: hidden;
+    z-index: 99999;
+
+    &__items {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        text-align: center;
+
+        p {
+            font-size: 18px;
+            font-weight: 500;
+            line-height: 25px;
+        }
+
+        h2 {
+            margin: 2rem 0;
+            font-size: 48px;
+            font-weight: 700;
+            color: #2C2646;
+        }
+
+        button {
+            width: 330px;
+            height: 40px;
+            border-radius: 18px;
+            font-size: 18px;
+            font-weight: 700;
+            color: #fff;
+            box-shadow: 4px 8px 10px 0px #00000026;
+            background: #6347EB;
+        }
+    }
+}

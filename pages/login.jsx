@@ -1,8 +1,8 @@
 import * as React from 'react'
 import Head from 'next/head'
-import RegisterPage from '@/app/components/screens/registerpage/registerpage';
+import LoginPage from '@/app/components/screens/loginPage/loginPage';
 
-const Register = () => {
+const Login = () => {
 
     return (
         <>
@@ -13,7 +13,7 @@ const Register = () => {
                 <meta name="keywords" content="" /> // ключевые слова, страницы
                 <meta name="image_src" content="" /> // URL для img
 
-                <meta property="og:title" content="Register" /> // Название страницы
+                <meta property="og:title" content="Login" /> // Название страницы
                 <meta property="og:description" content="" /> // Описание страницы
                 <meta property="og:image" content="" /> // URL для img: https://example.com/image.jpg
                 <meta property="og:url" content="" /> // оснавное URL: https://example.com/page-url
@@ -21,14 +21,14 @@ const Register = () => {
                 <meta property="og:site_name" content="" /> // Название сайта
                 <meta property="og:locale" content="ru_RU" />
 
-                <title>Register</title>
+                <title>Login</title>
             </Head>
 
             <div>
-                <RegisterPage />
+                <LoginPage />
             </div>
         </>
     )
 }
 
-export default Register;
+export default Login;

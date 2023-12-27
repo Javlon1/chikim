@@ -11,7 +11,7 @@ const NotFound = () => {
                 <h2 className={styles.notFound__item__title}>
                     4<span className={styles.notFound__item__title__zero}></span>4
                 </h2>
-                <Link className={styles.notFound__item__link} href="/">Return to Home</Link>
+                <Link className={styles.notFound__item__link} href="/">Bosh sahifaga qaytish</Link>
             </div>
         </section>
     )
