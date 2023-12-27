@@ -1,10 +1,11 @@
 import * as React from 'react';
-import Link from 'next/link'
+import { useRouter } from 'next/router';
 import styles from './LogIn.module.scss'
 import MyContainer from '@/app/components/ui/MyContainer/MyContainer'
 
 
 const LogIn = () => {
+    const router = useRouter();
     const [otp, setOTP] = React.useState(["", "", "", "", ""]);
 
     const handleInputChange = (index, value) => {
@@ -19,7 +20,16 @@ const LogIn = () => {
             setOTP(newOTP);
         }
     };
-    console.log(otp.join(""));
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        console.log(otp.join(""));
+
+        if (otp.join("").length === 5) {
+            setOTP(["", "", "", "", ""])
+            router.push('/general');
+        }
+    }
 
     return (
         <div className={styles.logIn}>
@@ -27,11 +37,12 @@ const LogIn = () => {
                 <div className={styles.logIn__items}>
                     <h3 className={styles.logIn__items__title}>Kirish</h3>
                     <p className={styles.logIn__items__subtitle}>Tizimga kirish uchun admin tomonidan berilgan kodni kiriting.</p>
-                    <form className={styles.logIn__items__form} action="#" method="post">
+                    <form onSubmit={handleSubmit} className={styles.logIn__items__form} action="#" method="post">
                         <div className={styles.logIn__items__form__inps}>
                             {
                                 otp?.map((digit, index) => (
                                     <input
+                                        required
                                         key={index}
                                         type="text"
                                         id={`otp-input-${index}`}
@@ -44,7 +55,7 @@ const LogIn = () => {
                                 ))
                             }
                         </div>
-                        <button  className={styles.logIn__items__form__btn}>Davom etish</button>
+                        <button className={styles.logIn__items__form__btn}>Davom etish</button>
                     </form>
                 </div>
             </MyContainer>

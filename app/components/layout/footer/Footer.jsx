@@ -12,8 +12,8 @@ const Footer = () => {
             <MyContainer>
                 <nav className={styles.footer__nav}>
                     <ul className={styles.footer__nav__list}>
-                        <li className={`${styles.footer__nav__list__item} ${pathname === "/" ? styles.active : ""}`}>
-                            <Link href={`/`} className={styles.footer__nav__list__item__link} >
+                        <li className={`${styles.footer__nav__list__item} ${pathname === "/general" ? styles.active : ""}`}>
+                            <Link href={`/general`} className={styles.footer__nav__list__item__link} >
                                 <span className={styles.footer__nav__list__item__link__icon}>
                                     <svg width="24" height="24" viewBox="0 0 23 22" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M8.5 21H14.5C19.5 21 21.5 19 21.5 14V8C21.5 3 19.5 1 14.5 1H8.5C3.5 1 1.5 3 1.5 8V14C1.5 19 3.5 21 8.5 21Z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
