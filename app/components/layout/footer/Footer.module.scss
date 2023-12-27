@@ -84,25 +84,25 @@
     &::before {
         content: "";
         position: absolute;
-        top: 43%;
-        left: -30.8px;
+        top: 40.5%;
+        left: -30.7px;
         width: 24px;
         height: 30px;
         background-color: transparent;
         border-top-right-radius: 50%;
-        box-shadow: 0 -20px 0 0 red;
+        box-shadow: 0 -20px 0 0 $white;
     }
 
     &::after {
         content: "";
         position: absolute;
-        top: 43%;
-        right: -30.8px;
+        top: 40.5%;
+        right: -30.7px;
         width: 24px;
         height: 30px;
         background-color: transparent;
         border-top-left-radius: 50%;
-        box-shadow: 0 -20px 0 0 red;
+        box-shadow: 0 -20px 0 0 $white;
     }
 }
 
