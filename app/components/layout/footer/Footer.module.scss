@@ -90,7 +90,7 @@
         height: 30px;
         background-color: transparent;
         border-top-right-radius: 50%;
-        box-shadow: 0 -20px 0 0 $white;
+        box-shadow: 0 -20px 0 0 red;
     }
 
     &::after {
@@ -102,7 +102,7 @@
         height: 30px;
         background-color: transparent;
         border-top-left-radius: 50%;
-        box-shadow: 0 -20px 0 0 $white;
+        box-shadow: 0 -20px 0 0 red;
     }
 }
 
