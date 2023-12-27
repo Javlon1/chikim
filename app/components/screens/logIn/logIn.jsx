@@ -61,7 +61,7 @@ const LogIn = () => {
                         <button className={styles.logIn__items__form__btn}>Davom etish</button>
                     </form>
                     <div className={styles.logIn__items__register}>
-                        <p>Hali ro’yhatdan o’tmagan bo’lsangiz va shaxsiy kirish kodi yo’qmi ? Unda <Link href="/general">ro’yhatdan o’ting.</Link></p>
+                        <p>Hali ro’yhatdan o’tmagan bo’lsangiz va shaxsiy kirish kodi yo’qmi ? Unda <Link href="/register">ro’yhatdan o’ting.</Link></p>
                     </div>
                 </div>
             </MyContainer>
