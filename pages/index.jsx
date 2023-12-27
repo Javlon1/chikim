@@ -1,5 +1,6 @@
 import * as React from 'react'
 import Head from 'next/head'
+import LogIn from '@/app/components/screens/logIn/logIn';
 
 const Index = () => {
 
@@ -12,7 +13,7 @@ const Index = () => {
                 <meta name="keywords" content="" /> // ключевые слова, страницы
                 <meta name="image_src" content="" /> // URL для img
 
-                <meta property="og:title" content="Home" /> // Название страницы
+                <meta property="og:title" content="Kirish" /> // Название страницы
                 <meta property="og:description" content="" /> // Описание страницы
                 <meta property="og:image" content="" /> // URL для img: https://example.com/image.jpg
                 <meta property="og:url" content="" /> // оснавное URL: https://example.com/page-url
@@ -20,12 +21,12 @@ const Index = () => {
                 <meta property="og:site_name" content="" /> // Название сайта
                 <meta property="og:locale" content="ru_RU" />
 
-                <title>Home</title>
+                <title>Kirish</title>
             </Head>
 
-            <main>
-                
-            </main>
+            <div>
+                <LogIn />
+            </div>
         </>
     )
 }

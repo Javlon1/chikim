@@ -1,6 +1,9 @@
 @import "../../../assets/variables";
 // FCFCFD
 .footer {
+    width: 100%;
+    position: fixed;
+    bottom: 0;
     height: 70px;
     display: flex;
     align-items: center;
