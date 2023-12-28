@@ -86,15 +86,15 @@ const GeneralPage = ({ initialChecked = false }) => {
                                         <p>{e.month}</p>
                                     </li>
                                 ))) : (
-                                    <ul className={styles.Skeleton}>
-                                        <li className={styles.Skeleton__item}></li>
-                                        <li className={styles.Skeleton__item}></li>
-                                        <li className={styles.Skeleton__item}></li>
-                                        <li className={styles.Skeleton__item}></li>
-                                        <li className={styles.Skeleton__item}></li>
-                                        <li className={styles.Skeleton__item}></li>
-                                        <li className={styles.Skeleton__item}></li>
-                                        <li className={styles.Skeleton__item}></li>
+                                    <ul className={styles.skeletonMon}>
+                                        <li className={styles.skeletonMon__item}></li>
+                                        <li className={styles.skeletonMon__item}></li>
+                                        <li className={styles.skeletonMon__item}></li>
+                                        <li className={styles.skeletonMon__item}></li>
+                                        <li className={styles.skeletonMon__item}></li>
+                                        <li className={styles.skeletonMon__item}></li>
+                                        <li className={styles.skeletonMon__item}></li>
+                                        <li className={styles.skeletonMon__item}></li>
                                     </ul>
                                 )
                             }
@@ -110,19 +110,35 @@ const GeneralPage = ({ initialChecked = false }) => {
 
                     <div className={styles.generalPage__items__Iprice}>
                         <ul className={styles.generalPage__items__Iprice__list}>
-                            <li>{selectedDay}</li>
                             {
-                                monthData?.map((e) => (
-                                    <li onClick={() => handleMonthChange(e.id)} key={e.id} className={`${styles.generalPage__items__Iprice__list__mon} ${selectedMonth === e.id ? `${styles.monact}` : ""}`}>
-                                        <p>{e.month}</p>
-                                    </li>
-                                ))
+                                monthData ? (
+                                    <>
+                                        <li>{selectedDay}</li>
+                                        {
+                                            monthData?.map((e) => (
+                                                <li onClick={() => handleMonthChange(e.id)} key={e.id} className={`${styles.generalPage__items__Iprice__list__mon} ${selectedMonth === e.id ? `${styles.monact}` : ""}`}>
+                                                    <p>{e.month}</p>
+                                                </li>
+                                            ))
+                                        }
+                                        <li>-</li>
+                                        <li>{selectedYear}</li>
+                                        <li>uchun chiqimlar</li>
+                                    </>
+                                ) : (
+                                    <p className={styles.skeletonYears}></p>
+                                )
                             }
-                            <li>-</li>
-                            <li>{selectedYear}</li>
-                            <li>uchun chiqimlar</li>
                         </ul>
-                        <h3 className={styles.generalPage__items__Iprice__price}>135.000</h3>
+                        <div className={styles.generalPage__items__Iprice__price}>
+                            {
+                                monthData ? (
+                                    <p>135.000</p>
+                                ) : (
+                                    <p className={styles.skeletonPrice}></p>
+                                )
+                            }
+                        </div>
                     </div>
 
                     <div>

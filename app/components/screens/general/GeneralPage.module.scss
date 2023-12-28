@@ -158,17 +158,23 @@
             }
 
             &__price {
-                margin-top: 1rem;
-                font-size: 45px;
-                font-weight: 700;
-                line-height: 57px;
-                color: $black;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+
+                p {
+                    margin-top: 1rem;
+                    font-size: 45px;
+                    font-weight: 700;
+                    line-height: 57px;
+                    color: $black;
+                }
             }
         }
     }
 }
 
-.Skeleton {
+.skeletonMon {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -182,6 +188,24 @@
         opacity: .7;
         animation: Skeleton-loading 1s linear infinite alternate;
     }
+}
+
+.skeletonPrice {
+    text-align: center;
+    border-radius: .4rem;
+    width: 200px;
+    height: 57px;
+    opacity: .7;
+    animation: Skeleton-loading 1s linear infinite alternate;
+}
+
+.skeletonYears{
+    border-radius: .4rem;
+    width: 200px;
+    height: 27px;
+    opacity: .7;
+    animation: Skeleton-loading 1s linear infinite alternate;
+
 }
 
 @keyframes Skeleton-loading {
