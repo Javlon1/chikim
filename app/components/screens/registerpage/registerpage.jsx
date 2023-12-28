@@ -47,7 +47,8 @@ const RegisterPage = () => {
         <div className={styles.registerPage}>
             <MyContainer>
                 <div className={styles.registerPage__items}>
-                    <Image src={registerImg} alt="" priority />
+                    <h1 className={styles.registerPage__items__title}>Chiqimlar</h1>
+                    <Image src={registerImg} widt={100} height={150} alt="" priority />
                     <p>Moliyaviy savodingizni oshiring <br /> har oylik chiqimlaringizni nazorat qiling</p>
                     <form onSubmit={handleSubmit} action="#" method="post">
                         <h3>Ro’yhatdan o’tish</h3>

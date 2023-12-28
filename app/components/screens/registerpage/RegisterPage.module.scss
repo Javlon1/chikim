@@ -1,3 +1,5 @@
+@import "../../../assets/variables";
+
 .registerPage {
     display: flex;
     align-items: center;
@@ -14,6 +16,14 @@
         justify-content: center;
         flex-direction: column;
         text-align: center;
+
+        &__title {
+            font-size: 18px;
+            font-weight: 700;
+            line-height: 28px;
+            color: $black;
+            margin-bottom: 2rem;
+        }
 
         p {
             margin: 1rem 0;

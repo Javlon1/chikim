@@ -44,7 +44,7 @@
                         text-align: center;
                         line-height: 20px;
                         transition: .5s;
-                        color:#2C2646;
+                        color: $black;
                     }
 
                     &__text {
@@ -52,13 +52,12 @@
                         font-size: 12px;
                         font-weight: 500;
                         line-height: 16px;
-                        color: #2C2646;
+                        color:  $black;
                         transition: .5s;
                     }
                 }
 
                 &.active {
-
                     .footer__nav__list__item__link__text {
                         color: #6347EB;
                     }
