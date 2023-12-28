@@ -17,14 +17,13 @@
         flex-direction: column;
         text-align: center;
 
-        &__title {
+        &__name {
             position: absolute;
             top: 1.5rem;
             font-size: 18px;
             font-weight: 700;
             line-height: 28px;
             color: $black;
-            margin-bottom: 2rem;
         }
 
         p {

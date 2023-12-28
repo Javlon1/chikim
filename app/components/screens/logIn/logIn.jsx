@@ -36,6 +36,7 @@ const LogIn = () => {
         <div className={styles.logIn}>
             <MyContainer>
                 <div className={styles.logIn__items}>
+                    <h1 className={styles.logIn__items__name}>Chiqimlar</h1>
                     <h3 className={styles.logIn__items__title}>Kirish</h3>
                     <p className={styles.logIn__items__subtitle}>
                         Tizimga kirish uchun <br /><span>kirish kodini</span> kiriting.
