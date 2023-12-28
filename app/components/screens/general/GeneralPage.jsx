@@ -5,6 +5,7 @@ import styles from './GeneralPage.module.scss'
 import MyContainer from '@/app/components/ui/MyContainer/MyContainer'
 import { getService } from '../../ui/services/get.service';
 import { Context } from '../../ui/Context/Context';
+import PieChart from '../../ui/Chart/Chart';
 
 
 const GeneralPage = ({ initialChecked = false }) => {
@@ -14,6 +15,7 @@ const GeneralPage = ({ initialChecked = false }) => {
     const [selectedMonth, setSelectedMonth] = React.useState(0);
     const [selectedYear, setSelectedYear] = React.useState(2024); // edit
     const [monthData, setMonthData] = React.useState();
+    const [emoji, setEmoji] = React.useState('🍎');
 
     const endpointGet = 'month';
 
@@ -49,6 +51,15 @@ const GeneralPage = ({ initialChecked = false }) => {
 
     const daysInSelectedMonth = daysInMonth(selectedYear, selectedMonth);
 
+
+
+    const chartData = {
+        datasets: [
+            {
+                data: [20, 30, 15, 25, 10], // Пример данных
+            },
+        ],
+    };
 
     // console.log(selectedDay);
     // console.log(selectedMonth + 1);
@@ -141,9 +152,35 @@ const GeneralPage = ({ initialChecked = false }) => {
                         </div>
                     </div>
 
-                    <div>
-
+                    <div className={styles.generalPage__items__chart}>
+                        <p className={styles.generalPage__items__chart__title}>Turkumlar ko’rinishida</p>
+                        <div className={styles.generalPage__items__chart__item}>
+                            <PieChart price={135000} data={chartData} />
+                            <ul className={styles.generalPage__items__chart__item__list}>
+                                <li className={styles.generalPage__items__chart__item__list__item}>
+                                    <p>{emoji}</p>
+                                    <p>10%</p>
+                                </li>
+                                <li className={styles.generalPage__items__chart__item__list__item}>
+                                    <p>{emoji}</p>
+                                    <p>10%</p>
+                                </li>
+                                <li className={styles.generalPage__items__chart__item__list__item}>
+                                    <p>{emoji}</p>
+                                    <p>10%</p>
+                                </li>
+                                <li className={styles.generalPage__items__chart__item__list__item}>
+                                    <p>{emoji}</p>
+                                    <p>10%</p>
+                                </li>
+                                <li className={styles.generalPage__items__chart__item__list__item}>
+                                    <p>{emoji}</p>
+                                    <p>10%</p>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
+
                 </div>
             </MyContainer>
         </section >

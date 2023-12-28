@@ -171,6 +171,46 @@
                 }
             }
         }
+
+        &__chart {
+            width: 100%;
+            margin: 1rem 0;
+
+            &__title {
+                text-align: start;
+                font-size: 15px;
+                font-weight: 700;
+                color: $black;
+            }
+
+            &__item {
+                width: 280px;
+                margin-top: 1rem;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+
+                &__list {
+                    display: flex;
+                    align-items: center;
+                    flex-direction: column;
+                    gap: 8px;
+
+                    &__item {
+                        display: flex;
+                        align-items: center;
+                        gap: 8px;
+
+                        p {
+                            font-size: 20px;
+                            font-weight: 700;
+                            line-height: 25px;
+                            color: $black;
+                        }
+                    }
+                }
+            }
+        }
     }
 }
 
@@ -199,13 +239,12 @@
     animation: Skeleton-loading 1s linear infinite alternate;
 }
 
-.skeletonYears{
+.skeletonYears {
     border-radius: .4rem;
     width: 200px;
     height: 27px;
     opacity: .7;
     animation: Skeleton-loading 1s linear infinite alternate;
-
 }
 
 @keyframes Skeleton-loading {
