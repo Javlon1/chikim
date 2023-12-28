@@ -1,51 +1,51 @@
 
 export const Month = [
     {
-        id: 1,
+        id: 0,
         month: "Yanvar",
     },
     {
-        id: 2,
+        id: 1,
         month: "Fevral",
     },
     {
-        id: 3,
+        id: 2,
         month: "Mart",
     },
     {
-        id: 4,
+        id: 3,
         month: "Aprel",
     },
     {
-        id: 5,
+        id: 4,
         month: "May",
     },
     {
-        id: 6,
+        id: 5,
         month: "Iyun",
     },
     {
-        id: 7,
+        id: 6,
         month: "Iyul",
     },
     {
-        id: 8,
+        id: 7,
         month: "Avgust",
     },
     {
-        id: 9,
+        id: 8,
         month: "Sentabr",
     },
     {
-        id: 10,
+        id: 9,
         month: "Oktabr",
     },
     {
-        id: 11,
+        id: 10,
         month: "Noyabr",
     },
     {
-        id: 12,
+        id: 11,
         month: "Dekabr",
     },
 ]

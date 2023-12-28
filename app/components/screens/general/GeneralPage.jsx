@@ -11,11 +11,10 @@ const GeneralPage = ({ initialChecked = false }) => {
     const { url } = React.useContext(Context);
     const [checked, setChecked] = React.useState(initialChecked);
     const [selectedDay, setSelectedDay] = React.useState(1);
-    const [selectedMonth, setSelectedMonth] = React.useState(1);
+    const [selectedMonth, setSelectedMonth] = React.useState(0);
     const [selectedYear, setSelectedYear] = React.useState(2024);
-    const [monthData, setMonthData] = React.useState();
+    const [monthData, setMonthData] = React.useState([]);
 
-    //
     const endpointGet = 'month';
 
     React.useEffect(() => {
@@ -24,13 +23,12 @@ const GeneralPage = ({ initialChecked = false }) => {
                 const result = await getService(endpointGet, url);
                 setMonthData(result);
             } catch (error) {
-                console.error('Error fetching data:', error);
+                console.error('Ошибка при получении данных:', error);
             }
         };
 
         fetchData();
     }, []);
-    //
 
     const handleToggle = () => {
         setChecked(!checked);
@@ -41,21 +39,20 @@ const GeneralPage = ({ initialChecked = false }) => {
         return date.getDate();
     };
 
-    const handleDayChange = (event) => {
-        const newDay = parseInt(event);
-        setSelectedDay(newDay);
+    const handleDayChange = (day) => {
+        setSelectedDay(day);
     };
 
-    const handleMonthChange = (event) => {
-        const newMonth = parseInt(event);
-        setSelectedMonth(newMonth);
+    const handleMonthChange = (month) => {
+        setSelectedMonth(month);
     };
+
+    const daysInSelectedMonth = daysInMonth(selectedYear, selectedMonth);
+
 
     // console.log(selectedDay);
     // console.log(selectedMonth);
     // console.log(selectedYear);
-
-    const daysInSelectedMonth = daysInMonth(selectedYear, selectedMonth);
 
     return (
         <section className={styles.generalPage}>
@@ -83,13 +80,11 @@ const GeneralPage = ({ initialChecked = false }) => {
                             }
                         </ul>
                         <ul className={`${styles.generalPage__items__dataFilter__day} ${checked ? `${styles.dataAct}` : ""}`}>
-                            {
-                                Array.from({ length: daysInSelectedMonth }, (_, i) => i).map((day) => (
-                                    <li onClick={() => handleDayChange(day+1)} className={`${styles.generalPage__items__dataFilter__month__item} ${selectedDay === day+1 ? `${styles.dateact}` : ""}`} key={day}>
-                                        <p>{day + 1}</p>
-                                    </li>
-                                ))
-                            }
+                            {Array.from({ length: daysInSelectedMonth }, (_, i) => i + 1).map((day) => (
+                                <li onClick={() => handleDayChange(day)} className={`${styles.generalPage__items__dataFilter__month__item} ${selectedDay === day ? `${styles.dateact}` : ""}`} key={day}>
+                                    <p>{day}</p>
+                                </li>
+                            ))}
                         </ul>
                     </div>
                 </div>
