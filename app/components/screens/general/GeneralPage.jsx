@@ -51,7 +51,7 @@ const GeneralPage = ({ initialChecked = false }) => {
 
 
     // console.log(selectedDay);
-    // console.log(selectedMonth+1);
+    // console.log(selectedMonth + 1);
     // console.log(selectedYear);
 
     return (
@@ -75,7 +75,14 @@ const GeneralPage = ({ initialChecked = false }) => {
                         <ul className={`${styles.generalPage__items__dataFilter__month} ${!checked ? `${styles.dataAct}` : ""}`}>
                             {
                                 monthData?.map((e) => (
-                                    <li onClick={() => handleMonthChange(e.id)} key={e.id} className={`${styles.generalPage__items__dataFilter__month__item} ${selectedMonth === e.id ? `${styles.dateact}` : ""}`}>
+                                    <li
+                                        key={e.id}
+                                        onClick={() => {
+                                            handleMonthChange(e.id)
+                                            setSelectedDay(1)
+                                        }}
+                                        className={`${styles.generalPage__items__dataFilter__month__item} ${selectedMonth === e.id ? `${styles.dateact}` : ""}`}
+                                    >
                                         <p>{e.month}</p>
                                     </li>
                                 ))
@@ -92,6 +99,7 @@ const GeneralPage = ({ initialChecked = false }) => {
 
                     <div className={styles.generalPage__items__Iprice}>
                         <ul className={styles.generalPage__items__Iprice__list}>
+                            <li>{selectedDay}</li>
                             {
                                 monthData?.map((e) => (
                                     <li onClick={() => handleMonthChange(e.id)} key={e.id} className={`${styles.generalPage__items__Iprice__list__mon} ${selectedMonth === e.id ? `${styles.monact}` : ""}`}>
@@ -107,7 +115,7 @@ const GeneralPage = ({ initialChecked = false }) => {
                     </div>
 
                     <div>
-                        
+
                     </div>
                 </div>
             </MyContainer>
