@@ -6,7 +6,7 @@ import styles from './Footer.module.scss'
 
 const Footer = () => {
     const { pathname } = useRouter();
-
+ 
     return (
         <footer className={styles.footer}>
             <MyContainer>
@@ -39,7 +39,7 @@ const Footer = () => {
                         <li className={`${styles.footer__nav__list__item} ${pathname === "/add" ? styles.active : ""}`}>
                             <Link href={`/add`} className={styles.footer__nav__list__item__link}>
                                 <span className={`${styles.footer__nav__list__item__link__icon} ${styles.shadow}`}>
-                                    <svg width="30" height="30" style={{borderRadius:"50%",  boxShadow:"0 0 5px #6347EB"}} viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M15 27.5C21.875 27.5 27.5 21.875 27.5 15C27.5 8.125 21.875 2.5 15 2.5C8.125 2.5 2.5 8.125 2.5 15C2.5 21.875 8.125 27.5 15 27.5Z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                                         <path d="M10 15H20" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                                         <path d="M15 20V10" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />

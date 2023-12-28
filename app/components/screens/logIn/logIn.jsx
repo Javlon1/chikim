@@ -28,7 +28,7 @@ const LogIn = () => {
 
         if (otp.join("").length === 5) {
             setOTP(["", "", "", "", ""])
-            router.push('/general');
+            router.push('/month');
         }
     }
 
