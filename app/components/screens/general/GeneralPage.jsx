@@ -51,7 +51,7 @@ const GeneralPage = ({ initialChecked = false }) => {
 
 
     // console.log(selectedDay);
-    // console.log(selectedMonth);
+    // console.log(selectedMonth+1);
     // console.log(selectedYear);
 
     return (
