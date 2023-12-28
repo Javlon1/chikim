@@ -1,5 +1,7 @@
 import * as React from 'react'
 import Head from 'next/head'
+import GeneralPage from '@/app/components/screens/general/GeneralPage';
+
 
 const General = () => {
 
@@ -23,9 +25,9 @@ const General = () => {
                 <title>General</title>
             </Head>
 
-            <main>
-                <h1>General</h1>
-            </main>
+            <div>
+                <GeneralPage />
+            </div>
         </>
     )
 }

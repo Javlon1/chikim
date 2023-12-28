@@ -1,0 +1,99 @@
+@import "../../../assets/variables";
+
+.generalPage {
+    &__items {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        flex-direction: column;
+
+        &__name {
+            width: 100%;
+            margin-top: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            &__title {
+                font-size: 18px;
+                font-weight: 700;
+                line-height: 28px;
+                color: $black;
+            }
+
+            &__add {
+                width: 20px;
+                height: 20px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+
+                a {
+                    color: $black;
+                    font-size: 1.7rem;
+                    font-weight: 400;
+                }
+
+            }
+        }
+
+        &__dataFilter {
+            margin-top: 1.4rem;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+
+
+            &__checkbox {
+                opacity: 0;
+                width: 0;
+                height: 0;
+
+                &:checked+.generalPage__items__dataFilter__slider:before {
+                    transform: translateX(96%);
+                    content: 'Kunlar';
+                }
+            }
+
+            &__slider {
+                width: 200px;
+                height: 40px;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                padding: 0 1rem;
+                position: relative;
+                cursor: pointer;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background-color: #fff;
+                border-radius: 34px;
+                transition: 0.4s;
+                border: 2px groove #3870FF;
+                box-shadow: 4px 8px 10px 0px #00000026;
+
+                &:before {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    color: #fff;
+                    position: absolute;
+                    content: 'Oylar';
+                    width: 100px;
+                    height: 36px;
+                    left: 0;
+                    bottom: 0;
+                    background-color: #3870FF;
+                    border-radius: 34px;
+                    border: none;
+                    transition: 0.4s;
+                }
+            }
+        }
+    }
+}
