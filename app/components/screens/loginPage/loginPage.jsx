@@ -17,7 +17,8 @@ const LoginPage = () => {
         <section className={styles.loginPage}>
             <MyContainer>
                 <div className={styles.loginPage__items}>
-                    <Image src={loginImg} alt="" priority />
+                    <h1 className={styles.loginPage__items__title}>Chiqimlar</h1>
+                    <Image width={100} height={150} src={loginImg} alt="" priority />
                     <p>Siz muvaffaqiyatli ro’yhatdan o’tdingiz ilovaga kirish uchun quyidagi kodni ishlating !</p>
                     <h2>23654</h2>
                     <button onClick={Submit}>Kirish</button>

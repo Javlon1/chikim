@@ -1,3 +1,5 @@
+@import "../../../assets/variables";
+
 .loginPage {
     display: flex;
     align-items: center;
@@ -14,6 +16,16 @@
         justify-content: center;
         flex-direction: column;
         text-align: center;
+        
+        &__title {
+            position: absolute;
+            top: 1.5rem;
+            font-size: 18px;
+            font-weight: 700;
+            line-height: 28px;
+            color: $black;
+            margin-bottom: 2rem;
+        }
 
         p {
             font-size: 18px;
