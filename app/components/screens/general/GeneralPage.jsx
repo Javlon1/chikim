@@ -13,7 +13,7 @@ const GeneralPage = ({ initialChecked = false }) => {
     const [selectedDay, setSelectedDay] = React.useState(1);
     const [selectedMonth, setSelectedMonth] = React.useState(0);
     const [selectedYear, setSelectedYear] = React.useState(2024); // edit
-    const [monthData, setMonthData] = React.useState([]);
+    const [monthData, setMonthData] = React.useState();
 
     const endpointGet = 'month';
 
@@ -74,7 +74,7 @@ const GeneralPage = ({ initialChecked = false }) => {
                         </div>
                         <ul className={`${styles.generalPage__items__dataFilter__month} ${!checked ? `${styles.dataAct}` : ""}`}>
                             {
-                                monthData?.map((e) => (
+                                monthData ? (monthData?.map((e) => (
                                     <li
                                         key={e.id}
                                         onClick={() => {
@@ -85,7 +85,18 @@ const GeneralPage = ({ initialChecked = false }) => {
                                     >
                                         <p>{e.month}</p>
                                     </li>
-                                ))
+                                ))) : (
+                                    <ul className={styles.Skeleton}>
+                                        <li className={styles.Skeleton__item}></li>
+                                        <li className={styles.Skeleton__item}></li>
+                                        <li className={styles.Skeleton__item}></li>
+                                        <li className={styles.Skeleton__item}></li>
+                                        <li className={styles.Skeleton__item}></li>
+                                        <li className={styles.Skeleton__item}></li>
+                                        <li className={styles.Skeleton__item}></li>
+                                        <li className={styles.Skeleton__item}></li>
+                                    </ul>
+                                )
                             }
                         </ul>
                         <ul className={`${styles.generalPage__items__dataFilter__day} ${checked ? `${styles.dataAct}` : ""}`}>

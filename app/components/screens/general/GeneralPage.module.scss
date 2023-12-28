@@ -2,6 +2,7 @@
 
 .generalPage {
     margin-bottom: 100px;
+
     &__items {
         display: flex;
         align-items: center;
@@ -140,6 +141,7 @@
 
         &__Iprice {
             width: 100%;
+
             &__list {
                 display: flex;
                 align-items: center;
@@ -149,7 +151,8 @@
                     font-size: 15px;
                     font-weight: 700;
                 }
-                &__mon{
+
+                &__mon {
                     display: none;
                 }
             }
@@ -165,6 +168,32 @@
     }
 }
 
+.Skeleton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+
+    &__item {
+        border-radius: .4rem;
+        width: 60px;
+        height: 24px;
+        opacity: .7;
+        animation: Skeleton-loading 1s linear infinite alternate;
+    }
+}
+
+@keyframes Skeleton-loading {
+    0% {
+        background-color: hsl(200, 20%, 70%);
+    }
+
+    100% {
+        background-color: hsl(200, 20%, 95%);
+    }
+}
+
 .slideract {
     color: #fff;
 }
@@ -177,6 +206,7 @@
     color: #fff;
     background-color: #3870FF;
 }
-.monact{
+
+.monact {
     display: block;
 }
