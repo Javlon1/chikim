@@ -1,6 +1,7 @@
 @import "../../../assets/variables";
 
 .generalPage {
+    margin-bottom: 100px;
     &__items {
         display: flex;
         align-items: center;
@@ -39,7 +40,7 @@
         }
 
         &__dataFilter {
-            margin-top: 2rem;
+            margin: 2rem 0;
             width: 310px;
             display: flex;
             align-items: center;
@@ -136,6 +137,32 @@
                 }
             }
         }
+
+        &__Iprice {
+            width: 100%;
+            &__list {
+                width: 270px;
+                display: flex;
+                align-items: center;
+                gap: 10px;
+
+                li {
+                    font-size: 15px;
+                    font-weight: 700;
+                }
+                &__mon{
+                    display: none;
+                }
+            }
+
+            &__price {
+                margin-top: 1rem;
+                font-size: 45px;
+                font-weight: 700;
+                line-height: 57px;
+                color: $black;
+            }
+        }
     }
 }
 
@@ -150,5 +177,7 @@
 .dateact {
     color: #fff;
     background-color: #3870FF;
-
+}
+.monact{
+    display: block;
 }

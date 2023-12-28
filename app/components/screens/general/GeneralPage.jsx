@@ -12,7 +12,7 @@ const GeneralPage = ({ initialChecked = false }) => {
     const [checked, setChecked] = React.useState(initialChecked);
     const [selectedDay, setSelectedDay] = React.useState(1);
     const [selectedMonth, setSelectedMonth] = React.useState(0);
-    const [selectedYear, setSelectedYear] = React.useState(2024);
+    const [selectedYear, setSelectedYear] = React.useState(2024); // edit
     const [monthData, setMonthData] = React.useState([]);
 
     const endpointGet = 'month';
@@ -58,12 +58,14 @@ const GeneralPage = ({ initialChecked = false }) => {
         <section className={styles.generalPage}>
             <MyContainer>
                 <div className={styles.generalPage__items}>
+
                     <div className={styles.generalPage__items__name}>
                         <h2 className={styles.generalPage__items__name__title}>Umumiy statistika</h2>
                         <span className={styles.generalPage__items__name__add}>
                             <Link href={`/add`}>+</Link>
                         </span>
                     </div>
+
                     <div className={styles.generalPage__items__dataFilter}>
                         <input type="checkbox" checked={checked} readOnly className={styles.generalPage__items__dataFilter__checkbox} />
                         <div onClick={handleToggle} className={styles.generalPage__items__dataFilter__slider}>
@@ -86,6 +88,26 @@ const GeneralPage = ({ initialChecked = false }) => {
                                 </li>
                             ))}
                         </ul>
+                    </div>
+
+                    <div className={styles.generalPage__items__Iprice}>
+                        <ul className={styles.generalPage__items__Iprice__list}>
+                            {
+                                monthData?.map((e) => (
+                                    <li onClick={() => handleMonthChange(e.id)} key={e.id} className={`${styles.generalPage__items__Iprice__list__mon} ${selectedMonth === e.id ? `${styles.monact}` : ""}`}>
+                                        <p>{e.month}</p>
+                                    </li>
+                                ))
+                            }
+                            <li>-</li>
+                            <li>{selectedYear}</li>
+                            <li>uchun chiqimlar</li>
+                        </ul>
+                        <h3 className={styles.generalPage__items__Iprice__price}>135.000</h3>
+                    </div>
+
+                    <div>
+                        
                     </div>
                 </div>
             </MyContainer>
