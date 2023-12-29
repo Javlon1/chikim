@@ -16,7 +16,6 @@ const PieChart = ({ price, data }) => {
 
         const total = data.reduce((sum, value) => sum + value.price, 0);
         let startAngle = 0;
-        console.log(total);
 
         data.forEach((value, index) => {
             const percentage = value.price / total;

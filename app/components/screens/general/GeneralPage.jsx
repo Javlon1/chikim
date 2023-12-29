@@ -53,31 +53,6 @@ const GeneralPage = ({ initialChecked = false }) => {
     const daysInSelectedMonth = daysInMonth(selectedYear, selectedMonth);
 
 
-
-    const chartData = [
-        {
-            price: 50,
-        },
-        {
-            price: 60,
-        },
-        {
-            price: 30,
-        },
-        {
-            price: 20,
-        },
-        {
-            price: 40,
-        },
-        {
-            price: 55,
-        },
-        {
-            price: 90,
-        },
-    ];
-
     const [totalPrice, setTotalPrice] = React.useState(445)
 
     const myData = [
@@ -91,16 +66,10 @@ const GeneralPage = ({ initialChecked = false }) => {
             price: 30,
         },
         {
-            price: 20,
-        },
-        {
             price: 40,
         },
         {
             price: 55,
-        },
-        {
-            price: 90,
         },
         {
             price: 90,
@@ -234,7 +203,7 @@ const GeneralPage = ({ initialChecked = false }) => {
                     <div className={styles.generalPage__items__chart}>
                         <p className={styles.generalPage__items__chart__title}>Turkumlar ko’rinishida</p>
                         <div className={styles.generalPage__items__chart__item}>
-                            <PieChart price={135000} data={chartData} />
+                            <PieChart price={totalSum} data={myData} />
                             <ul className={styles.generalPage__items__chart__item__list}>
                                 <li className={styles.generalPage__items__chart__item__list__item}>
                                     <p>{emoji}</p>
