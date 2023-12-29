@@ -14,11 +14,12 @@ const PieChart = ({ price, data }) => {
 
         ctx.clearRect(0, 0, width, height);
 
-        const total = data.datasets[0].data.reduce((sum, value) => sum + value, 0);
+        const total = data.reduce((sum, value) => sum + value.price, 0);
         let startAngle = 0;
+        console.log(total);
 
-        data.datasets[0].data.forEach((value, index) => {
-            const percentage = value / total;
+        data.forEach((value, index) => {
+            const percentage = value.price / total;
             const endAngle = startAngle + 2 * Math.PI * percentage;
 
             ctx.beginPath();

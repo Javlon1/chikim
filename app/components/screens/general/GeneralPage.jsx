@@ -15,7 +15,8 @@ const GeneralPage = ({ initialChecked = false }) => {
     const [selectedMonth, setSelectedMonth] = React.useState(0);
     const [selectedYear, setSelectedYear] = React.useState(2024); // edit
     const [monthData, setMonthData] = React.useState();
-    const [emoji, setEmoji] = React.useState('🍎');
+    // const allEmojis = ['👕', '👔', '👚', '👗', '👙', '👘', '👠', '👡', '👢', '👞', '🧦', '🧤', '🧣', '🎩', '🧢', '👒', '🎓', '🧢', '👑', '🎒', '👝', '👛', '👜', '🕶️', '🌂', '🥤', '🍹', '🍸', '🍷', '🥂', '🍺', '🍻', '🥃', '🍶', '☕', '🍵', '🧉', '🚖', '🚕', '🚗', '🚘', '🚙', '🛺', '🚍', '🚌', '🚎', '🚐', '🚚', '🚛', '🚜', '🛴', '🚲', '🛵', '🏍️', '🍔', '🍕', '🍟', '🌭', '🍿', '🍱', '🍲', '🍜', '🍛', '🍝', '🍠', '🍤', '🍥', '🍣', '🍙', '🍚', '🍘', '🍢', '🍡', '🍦', '🍧', '🍨', '🍩', '🍪', '🎂', '🍰', '🧁', '🥧', '🍫', '🍬', '🍭', '🍮', '🍯', '🍎', '🍏', '🍊', '🍋', '🍌', '🍉', '🍇', '🍓', '🍈', '🍒', '🍑', '🥭', '🍍', '🥥', '🥝'];
+    const [emoji, setEmoji] = React.useState('👕');
 
     const endpointGet = 'month';
 
@@ -53,17 +54,68 @@ const GeneralPage = ({ initialChecked = false }) => {
 
 
 
-    const chartData = {
-        datasets: [
-            {
-                data: [20, 30, 15, 25, 10], // Пример данных
-            },
-        ],
+    const chartData = [
+        {
+            price: 50,
+        },
+        {
+            price: 60,
+        },
+        {
+            price: 30,
+        },
+        {
+            price: 20,
+        },
+        {
+            price: 40,
+        },
+        {
+            price: 55,
+        },
+        {
+            price: 90,
+        },
+    ];
+
+    const [totalPrice, setTotalPrice] = React.useState(445)
+
+    const myData = [
+        {
+            price: 50,
+        },
+        {
+            price: 60,
+        },
+        {
+            price: 30,
+        },
+        {
+            price: 20,
+        },
+        {
+            price: 40,
+        },
+        {
+            price: 55,
+        },
+        {
+            price: 90,
+        },
+        {
+            price: 90,
+        },
+    ]
+
+
+    const calculateWidth = (e) => {
+        const totalPercentage = (e / totalPrice) * 100;
+        return totalPercentage > 100 ? '100%' : `${totalPercentage}%`;
     };
 
-    // console.log(selectedDay);
-    // console.log(selectedMonth + 1);
-    // console.log(selectedYear);
+
+    const totalSum = myData.reduce((sum, item) => sum + item.price, 0);
+    const redColor = totalSum >= totalPrice ? "red" : ""
 
     return (
         <section className={styles.generalPage}>
@@ -150,6 +202,33 @@ const GeneralPage = ({ initialChecked = false }) => {
                                 )
                             }
                         </div>
+                    </div>
+
+                    <div className={styles.generalPage__items__used}>
+                        <ul className={styles.generalPage__items__used__list1}>
+                            <li className={styles.generalPage__items__used__list1__item}>
+                                <p>Ishlatildi</p>
+                                <h5>{totalSum}</h5>
+                            </li>
+                            <li className={styles.generalPage__items__used__list1__item}>
+                                <p>Oylik limit</p>
+                                <h5>{totalPrice}</h5>
+                            </li>
+                        </ul>
+                        <ul className={styles.generalPage__items__used__list2}>
+                            {
+                                myData?.map((e, i) => (
+                                    <li
+                                        key={i}
+                                        className={styles.generalPage__items__used__list2__item}
+                                        style={{
+                                            width: calculateWidth(e.price),
+                                            backgroundColor: redColor,
+                                        }}
+                                    ></li>
+                                ))
+                            }
+                        </ul>
                     </div>
 
                     <div className={styles.generalPage__items__chart}>
