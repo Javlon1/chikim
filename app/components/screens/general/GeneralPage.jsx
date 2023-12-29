@@ -1,6 +1,5 @@
 import * as React from 'react';
 import Link from 'next/link'
-import Image from 'next/image'
 import styles from './GeneralPage.module.scss'
 import MyContainer from '@/app/components/ui/MyContainer/MyContainer'
 import { getService } from '../../ui/services/get.service';
@@ -13,10 +12,8 @@ const GeneralPage = ({ initialChecked = false }) => {
     const [checked, setChecked] = React.useState(initialChecked);
     const [selectedDay, setSelectedDay] = React.useState(1);
     const [selectedMonth, setSelectedMonth] = React.useState(0);
-    const [selectedYear, setSelectedYear] = React.useState(2024); // edit
+    const [selectedYear] = React.useState(new Date().getFullYear());
     const [monthData, setMonthData] = React.useState();
-    // const allEmojis = ['👕', '👔', '👚', '👗', '👙', '👘', '👠', '👡', '👢', '👞', '🧦', '🧤', '🧣', '🎩', '🧢', '👒', '🎓', '🧢', '👑', '🎒', '👝', '👛', '👜', '🕶️', '🌂', '🥤', '🍹', '🍸', '🍷', '🥂', '🍺', '🍻', '🥃', '🍶', '☕', '🍵', '🧉', '🚖', '🚕', '🚗', '🚘', '🚙', '🛺', '🚍', '🚌', '🚎', '🚐', '🚚', '🚛', '🚜', '🛴', '🚲', '🛵', '🏍️', '🍔', '🍕', '🍟', '🌭', '🍿', '🍱', '🍲', '🍜', '🍛', '🍝', '🍠', '🍤', '🍥', '🍣', '🍙', '🍚', '🍘', '🍢', '🍡', '🍦', '🍧', '🍨', '🍩', '🍪', '🎂', '🍰', '🧁', '🥧', '🍫', '🍬', '🍭', '🍮', '🍯', '🍎', '🍏', '🍊', '🍋', '🍌', '🍉', '🍇', '🍓', '🍈', '🍒', '🍑', '🥭', '🍍', '🥥', '🥝'];
-    const [emoji, setEmoji] = React.useState('👕');
     const [totalPrice, setTotalPrice] = React.useState(545)
     const [chartData, setChartData] = React.useState([
         { emoji: "👕", price: 50 },
