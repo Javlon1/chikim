@@ -1,14 +1,14 @@
 import * as React from 'react';
+import Link from 'next/link'
 import Image from 'next/image'
-import styles from './RegisterPage.module.scss'
-import MyContainer from '@/app/components/ui/MyContainer/MyContainer';
-import registerImg from "../../../../public/image/register.svg";
+import styles from './PasswordResetFormPage.module.scss'
+import MyContainer from '@/app/components/ui/MyContainer/MyContainer'
 import { useRouter } from 'next/router';
+import PasswordResetFormPageImg from "../../../../../public/image/password-reset-form.svg"
 
-const RegisterPage = () => {
+const PasswordResetFormPage = () => {
     const router = useRouter();
     const [formData, setFormData] = React.useState({
-        userName: '',
         password: '',
         password2: '',
     });
@@ -23,12 +23,11 @@ const RegisterPage = () => {
         e.preventDefault();
 
         const validationErrors = {};
-        if (!formData.userName.trim()) {
-            validationErrors.userName = 'Username yoki telefon raqamingizni kiriting';
+
+        if (!(formData.password.trim().length >= 8)) {
+            validationErrors.password = 'Parol 8 belgidan kam bo\'lmasligi kerak';
         }
-        if (!formData.password.trim()) {
-            validationErrors.password = 'Parolni kiriting';
-        }
+
         if (formData.password !== formData.password2) {
             validationErrors.password2 = 'Parollar mos kelmayabdi';
         }
@@ -38,32 +37,24 @@ const RegisterPage = () => {
             return;
         }
 
-        router.push('/login');
+        router.push('/');
 
         console.log(formData);
     };
 
+
     return (
-        <div className={styles.registerPage}>
+        <section className={styles.passwordResetFormPage}>
             <MyContainer>
-                <div className={styles.registerPage__items}>
-                    <h1 className={styles.registerPage__items__name}>Chiqimlar</h1>
-                    <Image src={registerImg} widt={100} height={150} alt="" priority />
-                    <p>Moliyaviy savodingizni oshiring <br /> har oylik chiqimlaringizni nazorat qiling</p>
+                <div className={styles.passwordResetFormPage__items}>
+                    <h1 className={styles.passwordResetFormPage__items__name}>Chiqimlar</h1>
+                    <Image src={PasswordResetFormPageImg} widt={100} height={150} alt="" priority />
                     <form onSubmit={handleSubmit} action="#" method="post">
-                        <h3>Ro’yhatdan o’tish</h3>
-                        <input
-                            name="userName"
-                            type="text"
-                            placeholder='Username yoki telefon raqam *'
-                            value={formData.userName}
-                            onChange={handleChange}
-                        />
-                        {errors.userName && <p className={styles.error}>{errors.userName}</p>}
+                        <h3>Parolni tiklash</h3>
                         <input
                             name="password"
                             type="password"
-                            placeholder='Parol *'
+                            placeholder='Yangi parol *'
                             value={formData.password}
                             onChange={handleChange}
                         />
@@ -71,7 +62,7 @@ const RegisterPage = () => {
                         <input
                             name="password2"
                             type="password"
-                            placeholder='Parol takroran *'
+                            placeholder='Yangi parol takroran *'
                             value={formData.password2}
                             onChange={handleChange}
                         />
@@ -80,8 +71,8 @@ const RegisterPage = () => {
                     </form>
                 </div>
             </MyContainer>
-        </div>
+        </section>
     )
 }
 
-export default RegisterPage;
+export default PasswordResetFormPage;

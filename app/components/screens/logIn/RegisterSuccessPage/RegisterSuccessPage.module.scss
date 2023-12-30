@@ -1,6 +1,6 @@
-@import "../../../assets/variables";
+@import "../../../../assets/variables";
 
-.loginPage {
+.registerSuccessPage {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -13,10 +13,11 @@
     &__items {
         display: flex;
         align-items: center;
-        justify-content: center;
+        justify-content: space-between;
         flex-direction: column;
         text-align: center;
-        
+        height: 400px;
+
         &__name {
             position: absolute;
             top: 1.5rem;
@@ -29,25 +30,20 @@
         p {
             font-size: 18px;
             font-weight: 500;
-            line-height: 25px;
-        }
-
-        h2 {
-            margin: 2rem 0;
-            font-size: 48px;
-            font-weight: 700;
-            color: #2C2646;
+            color: #3A3A3A;
         }
 
         button {
             width: 310px;
             height: 40px;
-            border-radius: 18px;
             font-size: 18px;
             font-weight: 700;
+            border-radius: 18px;
+            border: transparent;
             color: #fff;
-            box-shadow: 4px 8px 10px 0px #00000026;
             background: #6347EB;
+            box-shadow: 4px 8px 10px 0px #00000026;
         }
     }
+
 }

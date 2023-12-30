@@ -19,7 +19,7 @@ const General = () => {
                 <meta property="og:image" content="" /> // URL для img: https://example.com/image.jpg
                 <meta property="og:url" content="" /> // оснавное URL: https://example.com/page-url
                 <meta property="og:type" content="website" />
-                <meta property="og:site_name" content="" /> // Название сайта
+                <meta property="og:site_name" content="Chiqimlar" /> // Название сайта
                 <meta property="og:locale" content="ru_RU" />
 
                 <title>General</title>
