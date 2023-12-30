@@ -16,7 +16,38 @@ const SettingPage = () => {
                             <Link href={`/add`}>+</Link>
                         </span>
                     </div>
-
+                    <h3>Limit belgilash</h3>
+                    <form action="#" method="post">
+                        <input
+                            type="text"
+                            placeholder='Bu oy uchun limitni kiriting'
+                        />
+                        <button>Saqlash</button>
+                    </form>
+                    <h3>Turkum qo’shish</h3>
+                    <form action="#" method="post">
+                        <input
+                            type="text"
+                            placeholder='Turkum nomi'
+                        />
+                        <input
+                            type="text"
+                            placeholder='Icon'
+                        />
+                        <button>Saqlash</button>
+                    </form>
+                    <h3>Kirish kodini o’zgartirish</h3>
+                    <form action="#" method="post">
+                        <input
+                            type="text"
+                            placeholder='Eski kod'
+                        />
+                        <input
+                            type="text"
+                            placeholder='Yangi kod'
+                        />
+                        <button>Saqlash</button>
+                    </form>
                 </div>
             </MyContainer>
         </section>

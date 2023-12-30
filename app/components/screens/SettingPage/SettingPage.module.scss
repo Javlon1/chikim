@@ -1,7 +1,7 @@
 @import "../../../assets/variables";
 
 .settingPage {
-    margin-bottom: 100px;
+    margin-bottom: 150px;
 
     &__items {
         display: flex;
@@ -13,6 +13,7 @@
         &__name {
             width: 100%;
             margin-top: 1.5rem;
+            margin-bottom: .5rem;
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -39,6 +40,39 @@
 
             }
         }
-    }
 
+        h3 {
+            margin: 2rem 0;
+
+        }
+
+        form {
+            display: flex;
+            align-items: center;
+            gap: 1.3rem;
+            flex-direction: column;
+
+            input {
+                padding-left: 1.3rem;
+                font-size: 1rem;
+                font-weight: 500;
+                width: 310px;
+                height: 40px;
+                border-radius: 18px;
+                box-shadow: 4px 8px 10px 0px #00000026;
+            }
+
+            button {
+                width: 310px;
+                height: 40px;
+                font-size: 18px;
+                font-weight: 700;
+                border-radius: 18px;
+                border: transparent;
+                color: #fff;
+                background: #6347EB;
+                box-shadow: 4px 8px 10px 0px #00000026;
+            }
+        }
+    }
 }
