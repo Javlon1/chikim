@@ -1,0 +1,155 @@
+@import "../../../assets/variables";
+
+.addPage {
+    margin-bottom: 100px;
+
+    &__items {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        flex-direction: column;
+
+        &__name {
+            width: 100%;
+            margin-top: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            &__title {
+                font-size: 18px;
+                font-weight: 700;
+                line-height: 28px;
+                color: $black;
+            }
+
+            &__add {
+                width: 20px;
+                height: 20px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+
+                a {
+                    color: $black;
+                    font-size: 1.7rem;
+                    font-weight: 400;
+                }
+
+            }
+        }
+
+        h3 {
+            margin: 1.5rem 0;
+            font-size: 20px;
+            font-weight: 700;
+            color: $black;
+        }
+
+        form {
+            display: flex;
+            align-items: center;
+            gap: 1.3rem;
+            flex-direction: column;
+
+            .dropdown {
+                display: flex;
+                justify-content: center;
+                position: relative;
+
+                p {
+                    width: 310px;
+                    height: 40px;
+                    display: flex;
+                    padding: 0 1.3rem;
+                    align-items: center;
+                    border-radius: 18px;
+                    justify-content: space-between;
+                    box-shadow: 4px 8px 10px 0px #00000026;
+
+                    span {
+                        font-size: 11px;
+                        color: #00000080;
+                    }
+                }
+
+                ul {
+                    top: 3rem;
+                    position: absolute;
+                    display: flex;
+                    flex-direction: column;
+                    gap: .3rem;
+                    width: 280px;
+                    border-radius: 18px;
+                    padding: .5rem;
+                    background-color: #fff;
+                    box-shadow: 4px 8px 10px 0px #00000026;
+
+                    li {
+                        width: 100%;
+                        height: 30px;
+                        display: flex;
+                        align-items: center;
+                        gap: 5px;
+                        padding: 0 1.3rem;
+                        border-radius: 18px;
+                        background-color: #6347EB;
+                        box-shadow: 4px 4px 8px 0px #00000026;
+
+                        span {
+                            font-size: 12px;
+                            font-weight: 600;
+                            color: #fff;
+                        }
+                    }
+                }
+            }
+
+            input {
+                padding-left: 1.3rem;
+                font-size: 1rem;
+                font-weight: 500;
+                width: 310px;
+                height: 40px;
+                border-radius: 18px;
+                box-shadow: 4px 8px 10px 0px #00000026;
+            }
+
+            textarea {
+                width: 310px;
+                height: 90px;
+                border: none;
+                padding: 1.3rem;
+                font-size: 1rem;
+                font-weight: 500;
+                border-radius: 18px;
+                box-shadow: 4px 8px 10px 0px #00000026;
+                resize: none;  
+            }
+
+            button {
+                width: 310px;
+                height: 40px;
+                font-size: 18px;
+                font-weight: 700;
+                border-radius: 18px;
+                border: transparent;
+                color: #fff;
+                background: #6347EB;
+                box-shadow: 4px 8px 10px 0px #00000026;
+            }
+
+            span {
+                font-size: 16px;
+                font-weight: 600;
+                line-height: 20px;
+
+                a {
+                    color: #6347EB;
+                    margin-left: 5px;
+                }
+            }
+        }
+    }
+}

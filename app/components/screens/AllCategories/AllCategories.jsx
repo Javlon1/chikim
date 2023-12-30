@@ -22,7 +22,6 @@ const AllCategories = () => {
         return totalPercentage > 100 ? '100%' : `${totalPercentage}%`;
     };
 
-
     return (
         <section className={styles.allCategories}>
             <MyContainer>

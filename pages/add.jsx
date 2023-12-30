@@ -1,5 +1,6 @@
 import * as React from 'react'
 import Head from 'next/head'
+import AddPage from '@/app/components/screens/AddPage/AddPage';
 
 const Add = () => {
 
@@ -24,7 +25,7 @@ const Add = () => {
             </Head>
 
             <main>
-                <h1>Add</h1>
+                <AddPage />
             </main>
         </>
     )
