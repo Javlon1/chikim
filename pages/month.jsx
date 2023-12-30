@@ -1,5 +1,6 @@
 import * as React from 'react'
 import Head from 'next/head'
+import MonthPage from '@/app/components/screens/MonthPage/MonthPage';
 
 const Month = () => {
 
@@ -24,7 +25,7 @@ const Month = () => {
             </Head>
 
             <main>
-                <h1>Month</h1>
+                <MonthPage />
             </main>
         </>
     )
