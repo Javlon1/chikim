@@ -5,6 +5,53 @@ import Link from 'next/link';
 
 
 const SettingPage = () => {
+    const [errors, setErrors] = React.useState({});
+    const [editData, setEditData] = React.useState({
+        password: '',
+        change: '',
+    });
+
+    const [limitData, setLimitData] = React.useState({
+        price: ''
+    });
+
+    const editPassowrd = (e) => {
+        setEditData({ ...editData, [e.target.name]: e.target.value });
+        setErrors({ ...errors, [e.target.name]: '' });
+    };
+
+    const limit = (e) => {
+        setLimitData({ ...limitData, price: e.target.value });
+    };
+
+    const editHandle = (e) => {
+        e.preventDefault();
+
+        const validationErrors = {};
+
+        if (!(editData.password.trim().length >= 8)) {
+            validationErrors.password = 'Parol 8 belgidan kam bo\'lmasligi kerak';
+        }
+
+        if (!(editData.change.trim().length >= 8)) {
+            validationErrors.change = 'Parol 8 belgidan kam bo\'lmasligi kerak';
+        }
+
+
+        if (Object.keys(validationErrors).length > 0) {
+            setErrors(validationErrors);
+            return;
+        }
+
+        console.log(editData);
+    };
+
+
+    const limitHandle = (e) => {
+        e.preventDefault();
+
+        console.log(limitData);
+    };
 
     return (
         <section className={styles.settingPage}>
@@ -17,10 +64,13 @@ const SettingPage = () => {
                         </span>
                     </div>
                     <h3>Limit belgilash</h3>
-                    <form action="#" method="post">
+                    <form onSubmit={limitHandle} action="#" method="post">
                         <input
-                            type="text"
+                            name="limit"
+                            type="number"
                             placeholder='Bu oy uchun limitni kiriting'
+                            value={limitData.price}
+                            onChange={limit}
                         />
                         <button>Saqlash</button>
                     </form>
@@ -37,15 +87,23 @@ const SettingPage = () => {
                         <button>Saqlash</button>
                     </form>
                     <h3>Kirish kodini o’zgartirish</h3>
-                    <form action="#" method="post">
+                    <form action="#" onSubmit={editHandle} method="post">
                         <input
-                            type="text"
+                            name="password"
+                            type="number"
                             placeholder='Eski kod'
+                            value={editData.password}
+                            onChange={editPassowrd}
                         />
+                        {errors.password && <p className={styles.error}>{errors.password}</p>}
                         <input
-                            type="text"
-                            placeholder='Yangi kod'
+                            name="change"
+                            type="number"
+                            placeholder='Yangi kod '
+                            value={editData.change}
+                            onChange={editPassowrd}
                         />
+                        {errors.change && <p className={styles.error}>{errors.change}</p>}
                         <button>Saqlash</button>
                     </form>
                 </div>
