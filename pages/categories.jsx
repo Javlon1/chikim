@@ -1,5 +1,6 @@
 import * as React from 'react'
 import Head from 'next/head'
+import AllCategories from '@/app/components/screens/AllCategories/AllCategories';
 
 const Categories = () => {
 
@@ -24,7 +25,7 @@ const Categories = () => {
             </Head>
 
             <main>
-                <h1>Categories</h1>
+                <AllCategories />
             </main>
         </>
     )
