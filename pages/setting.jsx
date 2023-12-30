@@ -1,5 +1,6 @@
 import * as React from 'react'
 import Head from 'next/head'
+import SettingPage from '@/app/components/screens/SettingPage/SettingPage';
 
 const Setting = () => {
 
@@ -24,7 +25,7 @@ const Setting = () => {
             </Head>
 
             <main>
-                <h1>Setting</h1>
+                <SettingPage />
             </main>
         </>
     )

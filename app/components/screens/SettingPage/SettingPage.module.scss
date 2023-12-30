@@ -1,0 +1,44 @@
+@import "../../../assets/variables";
+
+.settingPage {
+    margin-bottom: 100px;
+
+    &__items {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        flex-direction: column;
+
+        &__name {
+            width: 100%;
+            margin-top: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            &__title {
+                font-size: 18px;
+                font-weight: 700;
+                line-height: 28px;
+                color: $black;
+            }
+
+            &__add {
+                width: 20px;
+                height: 20px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+
+                a {
+                    color: $black;
+                    font-size: 1.7rem;
+                    font-weight: 400;
+                }
+
+            }
+        }
+    }
+
+}
