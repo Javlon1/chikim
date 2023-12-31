@@ -6,6 +6,8 @@ import Link from 'next/link';
 
 const SettingPage = () => {
     const [errors, setErrors] = React.useState({});
+    const [showPicker, setShowPicker] = React.useState(false);
+    const emojis = ['😊', '😂', '😍', '👍', '🎉', '❤️', '🚀', '🌟', '🔥', '🎈', '👍', '🎉', '❤️', '🚀', '🌟',, '👍', '🎉', '❤️', '🚀', '🌟',, '👍', '🎉', '❤️', '🚀', '🌟',, '👍', '🎉', '❤️', '🚀', '🌟',];
 
     const [editData, setEditData] = React.useState({
         password: '',
@@ -62,10 +64,6 @@ const SettingPage = () => {
 
         console.log(limitData);
     };
-    //
-    const emojis = ['😊', '😂', '😍', '👍', '🎉', '❤️', '🚀', '🌟', '🔥', '🎈'];
-
-    const [showPicker, setShowPicker] = React.useState(false);
 
     const togglePicker = () => {
         setShowPicker(!showPicker);

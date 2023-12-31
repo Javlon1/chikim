@@ -90,14 +90,14 @@
     }
 
     span {
+        width: 24px;
+        height: 24px;
+        display: flex;
         position: absolute;
         margin-right: 1rem;
-        width: 20px;
-        height: 20px;
-        border-radius: 50%;
-        display: flex;
         align-items: center;
         justify-content: center;
+        border-radius: 50%;
         font-size: 1.3rem;
         font-weight: 500;
         border: 2px solid #292D32;
@@ -107,10 +107,15 @@
 }
 
 .emoji__picker {
+    width: 250px;
+    display: flex;
+    align-items: center;
+    z-index: 9;
+    gap: .5rem;
+    flex-wrap: wrap;
+    position: absolute;
     top: 7rem;
     right: 0;
-    position: absolute;
-    width: 250px;
     padding: .5rem;
     border-radius: 10px;
     border: 2px solid #FFFFFF;
@@ -118,12 +123,15 @@
     box-shadow: 0px 8px 10px 0px #00000026;
 
     span {
-        width: 24px;
-        height: 24px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 26px;
+        height: 26px;
         border-radius: 50%;
         box-shadow: 4px 4px 10px 0px #00000026;
 
         cursor: pointer;
-        font-size: 20px;
+        font-size: 19px;
     }
 }
