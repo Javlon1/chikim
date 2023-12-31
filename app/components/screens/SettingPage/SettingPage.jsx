@@ -6,7 +6,7 @@ import Link from 'next/link';
 
 const SettingPage = () => {
     const [errors, setErrors] = React.useState({});
-    
+
     const [editData, setEditData] = React.useState({
         password: '',
         change: '',
@@ -122,7 +122,7 @@ const SettingPage = () => {
                                 value={selectedEmoji ? selectedEmoji.icon : ''}
                             />
 
-                            <p onClick={togglePicker}>+</p>
+                            <span onClick={togglePicker}>+</span>
                         </div>
                         {showPicker && (
                             <div className={styles.emoji__picker}>
