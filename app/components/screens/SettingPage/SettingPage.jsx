@@ -120,7 +120,9 @@ const SettingPage = () => {
                                 value={selectedEmoji ? selectedEmoji.icon : ''}
                             />
 
-                            <span onClick={togglePicker}>+</span>
+                            <span onClick={togglePicker}>
+                                <p>+</p>
+                            </span>
                         </div>
                         {showPicker && (
                             <div className={styles.emoji__picker}>
