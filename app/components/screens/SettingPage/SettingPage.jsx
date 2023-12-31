@@ -6,6 +6,7 @@ import Link from 'next/link';
 
 const SettingPage = () => {
     const [errors, setErrors] = React.useState({});
+    
     const [editData, setEditData] = React.useState({
         password: '',
         change: '',
@@ -15,6 +16,11 @@ const SettingPage = () => {
         price: ''
     });
 
+    const [selectedEmoji, setSelectedEmoji] = React.useState({
+        name: "",
+        icon: "",
+    });
+
     const editPassowrd = (e) => {
         setEditData({ ...editData, [e.target.name]: e.target.value });
         setErrors({ ...errors, [e.target.name]: '' });
@@ -22,6 +28,10 @@ const SettingPage = () => {
 
     const limit = (e) => {
         setLimitData({ ...limitData, price: e.target.value });
+    };
+
+    const Emoji = (e) => {
+        setSelectedEmoji({ ...selectedEmoji, [e.target.name]: e.target.value });
     };
 
     const editHandle = (e) => {
@@ -52,6 +62,25 @@ const SettingPage = () => {
 
         console.log(limitData);
     };
+    //
+    const emojis = ['😊', '😂', '😍', '👍', '🎉', '❤️', '🚀', '🌟', '🔥', '🎈'];
+
+    const [showPicker, setShowPicker] = React.useState(false);
+
+    const togglePicker = () => {
+        setShowPicker(!showPicker);
+    };
+
+    const handleEmojiClick = (emoji) => {
+        setSelectedEmoji({ ...selectedEmoji, icon: emoji });
+        togglePicker();
+    };
+
+    const iconHandle = (e) => {
+        e.preventDefault();
+
+        console.log(selectedEmoji);
+    };
 
     return (
         <section className={styles.settingPage}>
@@ -75,15 +104,36 @@ const SettingPage = () => {
                         <button>Saqlash</button>
                     </form>
                     <h3>Turkum qo’shish</h3>
-                    <form action="#" method="post">
+                    <form onSubmit={iconHandle} action="#" method="post">
                         <input
                             type="text"
+                            name='name'
+                            onChange={Emoji}
                             placeholder='Turkum nomi'
                         />
-                        <input
-                            type="text"
-                            placeholder='Icon'
-                        />
+                        <div className={styles.icon}>
+                            <input
+                                onClick={togglePicker}
+                                type="text"
+                                name='icon'
+                                onChange={Emoji}
+                                placeholder='Icon'
+                                readOnly
+                                value={selectedEmoji ? selectedEmoji.icon : ''}
+                            />
+
+                            <p onClick={togglePicker}>+</p>
+                        </div>
+                        {showPicker && (
+                            <div className={styles.emoji__picker}>
+                                {emojis.map((emoji, index) => (
+                                    <span key={index} onClick={() => handleEmojiClick(emoji)}>
+                                        {emoji}
+                                    </span>
+                                ))}
+                            </div>
+                        )}
+
                         <button>Saqlash</button>
                     </form>
                     <h3>Kirish kodini o’zgartirish</h3>
