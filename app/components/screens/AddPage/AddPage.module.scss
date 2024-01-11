@@ -1,7 +1,7 @@
 @import "../../../assets/variables";
 
 .addPage {
-    margin-bottom: 100px;
+    margin-bottom: 150px;
 
     &__items {
         display: flex;
@@ -125,7 +125,7 @@
                 font-weight: 500;
                 border-radius: 18px;
                 box-shadow: 4px 8px 10px 0px #00000026;
-                resize: none;  
+                resize: none;
             }
 
             button {
@@ -151,5 +151,22 @@
                 }
             }
         }
+    }
+}
+
+.skeleton {
+    border-radius: .4rem;
+    width: 100px;
+    height: 20px;
+    animation: Skeleton-loading 1s linear infinite alternate;
+}
+
+@keyframes Skeleton-loading {
+    0% {
+        background-color: hsl(200, 20%, 70%);
+    }
+
+    100% {
+        background-color: hsl(200, 20%, 95%);
     }
 }

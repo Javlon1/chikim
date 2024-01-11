@@ -26,18 +26,11 @@
             }
 
             &__add {
-                width: 20px;
-                height: 20px;
+                width: 30px;
+                height: 30px;
                 display: flex;
                 align-items: center;
                 justify-content: center;
-
-                a {
-                    color: $black;
-                    font-size: 1.7rem;
-                    font-weight: 400;
-                }
-
             }
         }
 

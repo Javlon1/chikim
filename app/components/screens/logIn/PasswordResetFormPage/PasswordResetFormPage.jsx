@@ -1,13 +1,15 @@
 import * as React from 'react';
-import Link from 'next/link'
 import Image from 'next/image'
 import styles from './PasswordResetFormPage.module.scss'
 import MyContainer from '@/app/components/ui/MyContainer/MyContainer'
 import { useRouter } from 'next/router';
 import PasswordResetFormPageImg from "../../../../../public/image/password-reset-form.svg"
+import { Context } from '@/app/components/ui/Context/Context';
 
 const PasswordResetFormPage = () => {
+    const { urlApi } = React.useContext(Context);
     const router = useRouter();
+    const { uidb64, token } = router.query;
     const [formData, setFormData] = React.useState({
         password: '',
         password2: '',
@@ -37,9 +39,26 @@ const PasswordResetFormPage = () => {
             return;
         }
 
-        router.push('/');
+        const resetConfirm = async () => {
+            const response = await fetch(`${urlApi}/password/reset/confirm/${uidb64}/${token}/`, {
+                method: 'PATCH',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ new_password: formData.password }),
+            });
 
-        console.log(formData);
+            if (response.ok) {
+                const data = await response.json();
+                console.log(data.detail);
+                router.push('/');
+            } else {
+                const errorData = await response.json();
+                console.error(errorData.detail);
+            }
+        };
+
+        resetConfirm();
     };
 
 

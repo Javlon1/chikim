@@ -2,40 +2,99 @@ import * as React from 'react';
 import Link from 'next/link'
 import styles from './GeneralPage.module.scss'
 import MyContainer from '@/app/components/ui/MyContainer/MyContainer'
-import { getService } from '../../ui/services/get.service';
 import { Context } from '../../ui/Context/Context';
 import PieChart from '../../ui/Chart/Chart';
 
-
 const GeneralPage = ({ initialChecked = false }) => {
-    const { url } = React.useContext(Context);
+    const { urlApi, auth_token } = React.useContext(Context);
     const [checked, setChecked] = React.useState(initialChecked);
-    const [selectedDay, setSelectedDay] = React.useState(1);
-    const [selectedMonth, setSelectedMonth] = React.useState(0);
-    const [selectedYear] = React.useState(new Date().getFullYear());
-    const [monthData, setMonthData] = React.useState();
-    const [totalPrice, setTotalPrice] = React.useState(545)
-    const [chartData, setChartData] = React.useState([
-        { emoji: "👕", price: 50 },
-        { emoji: "☕", price: 60 },
-        { emoji: "🚕", price: 50 },
-        { emoji: "🍰", price: 70 },
-    ]);
 
-    const endpointGet = 'month';
+    const [selectedDay, setSelectedDay] = React.useState(new Date().getDate());
+    const [selectedMonth, setSelectedMonth] = React.useState(new Date().getMonth());
+    const [selectedYear] = React.useState(new Date().getFullYear());
+
+    const [formattedDate, setFormattedDate] = React.useState(`${selectedYear}-${selectedMonth + 1}-${selectedDay}`)
+
+    const [monthData] = React.useState([{ id: 0, month: "Yanvar" }, { id: 1, month: "Fevral" }, { id: 2, month: "Mart" }, { id: 3, month: "Aprel" }, { id: 4, month: "May" }, { id: 5, month: "Iyun" }, { id: 6, month: "Iyul" }, { id: 7, month: "Avgust", }, { id: 8, month: "Sentabr" }, { id: 9, month: "Oktabr" }, { id: 10, month: "Noyabr" }, { id: 11, month: "Dekabr" }]);
+    const [totalPrice, setTotalPrice] = React.useState(0)
+    const [chartData, setChartData] = React.useState([]);
+
+    // 
+    const endpointGet = 'limit';
+    const fullUrl = `${urlApi}/${endpointGet}/`;
 
     React.useEffect(() => {
         const fetchData = async () => {
             try {
-                const result = await getService(endpointGet, url);
-                setMonthData(result);
+                const response = await fetch(fullUrl, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Token ${auth_token}`,
+                    },
+                });
+
+                if (!response.ok) {
+                    throw new Error(`Ошибка: ${response.status}`);
+                }
+
+                const data = await response.json();
+
+                if (data && data.limit !== undefined) {
+                    setTotalPrice(data.limit);
+                } else {
+                    console.error('Ошибка: Некорректные данные получены от сервера.');
+                }
+
             } catch (error) {
-                console.error('Ошибка при получении данных:', error);
+                console.error('Ошибка при запросе данных:', error.message);
             }
         };
 
         fetchData();
-    }, []);
+    }, [fullUrl, formattedDate]);
+
+    // 
+
+    const endpointGetAll = 'all_expense';
+    const fullUrlAll = `${urlApi}/${endpointGetAll}/`;
+
+    React.useEffect(() => {
+        const fetchData = async () => {
+            try {
+
+                const urlWithDate = `${fullUrlAll}?date=${formattedDate}`;
+
+                const response = await fetch(urlWithDate, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Token ${auth_token}`,
+                    },
+                });
+
+                if (!response.ok) {
+                    throw new Error(`Ошибка: ${response.status}`);
+                }
+
+                const data = await response.json();
+
+                if (data) {
+                    setChartData(data);
+                } else {
+                    console.error('Ошибка: Некорректные данные получены от сервера.');
+                }
+
+            } catch (error) {
+                console.error('Ошибка при запросе данных:', error.message);
+            }
+        };
+
+        fetchData();
+    }, [fullUrlAll, formattedDate]);
+
+    // 
+
 
     const handleToggle = () => {
         setChecked(!checked);
@@ -50,10 +109,12 @@ const GeneralPage = ({ initialChecked = false }) => {
 
     const handleDayChange = (day) => {
         setSelectedDay(day);
+        setFormattedDate(`${selectedYear}-${selectedMonth + 1}-${day}`)
     };
 
     const handleMonthChange = (month) => {
         setSelectedMonth(month);
+        setFormattedDate(`${selectedYear}-${month + 1}-${selectedDay}`)
     };
 
     const calculateWidth = (e) => {
@@ -61,12 +122,12 @@ const GeneralPage = ({ initialChecked = false }) => {
         return totalPercentage > 100 ? '100%' : `${totalPercentage}%`;
     };
 
-    const totalSum = chartData.reduce((sum, item) => sum + item.price, 0);
-    const redColor = totalSum >= totalPrice ? "red" : ""
+    const redColor = chartData.length > 0 && chartData[0].total_category_amount >= totalPrice ? "red" : "";
+
 
     const chartDataWithPercentage = chartData.map(item => ({
         ...item,
-        percentage: (item.price / totalSum) * 100,
+        percentage: (item.total_amount / chartData[0].total_category_amount) * 100,
     }));
 
     return (
@@ -89,7 +150,7 @@ const GeneralPage = ({ initialChecked = false }) => {
                         </div>
                         <ul className={`${styles.generalPage__items__dataFilter__month} ${!checked ? `${styles.dataAct}` : ""}`}>
                             {
-                                monthData ? (monthData?.map((e) => (
+                                monthData?.map((e) => (
                                     <li
                                         key={e.id}
                                         onClick={() => {
@@ -100,18 +161,7 @@ const GeneralPage = ({ initialChecked = false }) => {
                                     >
                                         <p>{e.month}</p>
                                     </li>
-                                ))) : (
-                                    <ul className={styles.skeletonMon}>
-                                        <li className={styles.skeletonMon__item}></li>
-                                        <li className={styles.skeletonMon__item}></li>
-                                        <li className={styles.skeletonMon__item}></li>
-                                        <li className={styles.skeletonMon__item}></li>
-                                        <li className={styles.skeletonMon__item}></li>
-                                        <li className={styles.skeletonMon__item}></li>
-                                        <li className={styles.skeletonMon__item}></li>
-                                        <li className={styles.skeletonMon__item}></li>
-                                    </ul>
-                                )
+                                ))
                             }
                         </ul>
                         <ul className={`${styles.generalPage__items__dataFilter__day} ${checked ? `${styles.dataAct}` : ""}`}>
@@ -126,7 +176,7 @@ const GeneralPage = ({ initialChecked = false }) => {
                     <div className={styles.generalPage__items__Iprice}>
                         <ul className={styles.generalPage__items__Iprice__list}>
                             {
-                                monthData ? (
+                                chartData.length > 0 ? (
                                     <>
                                         <li>{selectedDay}</li>
                                         {
@@ -147,8 +197,8 @@ const GeneralPage = ({ initialChecked = false }) => {
                         </ul>
                         <div className={styles.generalPage__items__Iprice__price}>
                             {
-                                monthData ? (
-                                    <p>135.000</p>
+                                chartData.length > 0 ? (
+                                    <p>{chartData && chartData[0] ? chartData[0].total_category_amount : ''}</p>
                                 ) : (
                                     <p className={styles.skeletonPrice}></p>
                                 )
@@ -156,49 +206,61 @@ const GeneralPage = ({ initialChecked = false }) => {
                         </div>
                     </div>
 
-                    <div className={styles.generalPage__items__used}>
-                        <ul className={styles.generalPage__items__used__list1}>
-                            <li className={styles.generalPage__items__used__list1__item}>
-                                <p>Ishlatildi</p>
-                                <h5>{totalSum}</h5>
-                            </li>
-                            <li className={styles.generalPage__items__used__list1__item}>
-                                <p>Oylik limit</p>
-                                <h5>{totalPrice}</h5>
-                            </li>
-                        </ul>
-                        <ul className={styles.generalPage__items__used__list2}>
-                            {
-                                chartData?.map((e, i) => (
-                                    <li
-                                        key={i}
-                                        className={styles.generalPage__items__used__list2__item}
-                                        style={{
-                                            width: calculateWidth(e.price),
-                                            backgroundColor: redColor,
-                                        }}
-                                    ></li>
-                                ))
-                            }
-                        </ul>
-                    </div>
-
-                    <div className={styles.generalPage__items__chart}>
-                        <p className={styles.generalPage__items__chart__title}>Turkumlar ko’rinishida</p>
-                        <div className={styles.generalPage__items__chart__item}>
-                            <PieChart price={totalSum} data={chartData} />
-                            <ul className={styles.generalPage__items__chart__item__list}>
-                                {chartDataWithPercentage.map((item, index) => (
-                                    <li className={styles.generalPage__items__chart__item__list__item} key={index}>
-                                        <p>{item.emoji}</p>
-                                        <p>
-                                            {`${item.percentage.toFixed(2)}%`}
-                                        </p>
+                    {
+                        chartData.length > 0 ? (
+                            <div className={styles.generalPage__items__used}>
+                                <ul className={styles.generalPage__items__used__list1}>
+                                    <li className={styles.generalPage__items__used__list1__item}>
+                                        <p>Ishlatildi</p>
+                                        <h5>{chartData && chartData[0] ? chartData[0].total_category_amount : ''}</h5>
                                     </li>
-                                ))}
-                            </ul>
-                        </div>
-                    </div>
+                                    <li className={styles.generalPage__items__used__list1__item}>
+                                        <p>Oylik limit</p>
+                                        <h5>{totalPrice}</h5>
+                                    </li>
+                                </ul>
+                                <ul className={styles.generalPage__items__used__list2}>
+                                    {
+                                        chartData?.map((e, i) => (
+                                            <li
+                                                key={i}
+                                                className={styles.generalPage__items__used__list2__item}
+                                                style={{
+                                                    width: calculateWidth(e.total_amount),
+                                                    backgroundColor: redColor,
+                                                }}
+                                            ></li>
+                                        ))
+                                    }
+                                </ul>
+                            </div>
+                        ) : (
+                            <p className={styles.skeletonMyCh}></p>
+                        )
+                    }
+
+                    {
+                        chartData.length > 0 ? (
+                            <div className={styles.generalPage__items__chart}>
+                                <p className={styles.generalPage__items__chart__title}>Turkumlar ko’rinishida</p>
+                                <div className={styles.generalPage__items__chart__item}>
+                                    <PieChart total_amount={chartData.length > 0 ? chartData[0].total_category_amount : 0} data={chartData} />
+                                    <ul className={styles.generalPage__items__chart__item__list}>
+                                        {chartDataWithPercentage.map((item, index) => (
+                                            <li className={styles.generalPage__items__chart__item__list__item} key={index}>
+                                                <p>{item.category_emoji}</p>
+                                                <p>
+                                                    {`${item.percentage.toFixed(2)}%`}
+                                                </p>
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </div>
+                            </div>
+                        ) : (
+                            <p className={styles.skeletonCh}></p>
+                        )
+                    }
 
                 </div>
             </MyContainer>

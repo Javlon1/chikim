@@ -1,19 +1,21 @@
 import * as React from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import styles from './AddPage.module.scss';
 import MyContainer from '@/app/components/ui/MyContainer/MyContainer';
+import { Context } from '../../ui/Context/Context';
 
 const AddPage = () => {
-    const [data, setdata] = React.useState([
-        { emoji: '👕', title: 'Kiyim kechak', price: 250 },
-        { emoji: '🚕', title: 'Taxi', price: 100 },
-        { emoji: '🍰', title: 'Ovqat uchun', price: 70 },
-    ]);
+    const router = useRouter();
+    const { urlApi, auth_token } = React.useContext(Context);
+    const [data, setdata] = React.useState([]);
+
     const [formData, setFormData] = React.useState({
         сhiqim: '',
         text1: '',
         text2: '',
     });
+
     const [errors, setErrors] = React.useState({});
     const [isOpen, setIsOpen] = React.useState(false);
     const [selectedItem, setSelectedItem] = React.useState(null);
@@ -32,7 +34,38 @@ const AddPage = () => {
         setErrors({ ...errors, [e.target.name]: '' });
     };
 
-    const handleSubmit = (e) => {
+
+    const endpointGet = 'category';
+    const fullUrl = `${urlApi}/${endpointGet}/`;
+
+    React.useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await fetch(fullUrl, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Token ${auth_token}`,
+                    },
+                });
+
+                if (!response.ok) {
+                    throw new Error(`Ошибка: ${response.status}`);
+                }
+
+                const data = await response.json();
+
+                setdata(data);
+
+            } catch (error) {
+                console.error('Ошибка при запросе данных:', error.message);
+            }
+        };
+
+        fetchData();
+    }, [fullUrl]);
+
+    const handleSubmit = async (e) => {
         e.preventDefault();
 
         const validationErrors = {};
@@ -50,7 +83,40 @@ const AddPage = () => {
             return;
         }
 
-        console.log({ ...formData, сhiqim: selectedItem, text1: formData.text1, text2: formData.text2 });
+        const endpointPost = 'expense';
+        const fullUrl = `${urlApi}/${endpointPost}/`;
+        try {
+            const response = await fetch(fullUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Token ${auth_token}`,
+                },
+                body: JSON.stringify({
+                    category_id: selectedItem.id,
+                    amount: formData.text1,
+                    description: formData.text2,
+                }),
+            });
+
+            setSelectedItem(null)
+            setFormData({
+                сhiqim: '',
+                text1: '',
+                text2: '',
+            });
+
+
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            } else if (response.ok) {
+                router.push('/month');
+            }
+
+        } catch (error) {
+            console.error('Error during POST request:', error);
+        }
+
     };
 
     return (
@@ -75,16 +141,26 @@ const AddPage = () => {
                                     />
                                 </svg>
                             </p>
-                            {isOpen && (
-                                <ul>
-                                    {data.map((item, index) => (
-                                        <li key={index} onClick={() => handleItemClick(item)}>
-                                            <span>{item.emoji}</span>
-                                            <span>{item.title}</span>
-                                        </li>
-                                    ))}
-                                </ul>
-                            )}
+                            {
+                                isOpen && (
+                                    <ul>
+                                        {
+                                            data.length > 0 ? (
+
+                                                data.map((item, index) => (
+                                                    <li key={index} onClick={() => handleItemClick(item)}>
+                                                        <span>{item.emoji}</span>
+                                                        <span>{item.title}</span>
+                                                    </li>
+                                                ))
+
+                                            ) : (
+                                                <li className={styles.skeleton}></li>
+                                            )
+                                        }
+                                    </ul>
+                                )
+                            }
                         </div>
                         {errors.сhiqim && <p className={styles.сhiqim}>{errors.сhiqim}</p>}
 

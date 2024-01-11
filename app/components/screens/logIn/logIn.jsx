@@ -24,7 +24,6 @@ const LogIn = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log(otp.join(""));
 
         if (otp.join("").length === 5) {
             setOTP(["", "", "", "", ""])

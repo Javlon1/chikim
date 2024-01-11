@@ -5,21 +5,27 @@ import MyContainer from '@/app/components/ui/MyContainer/MyContainer'
 import loginImg from "../../../../../public/image/login.svg"
 import { useRouter } from 'next/router';
 import Link from 'next/link';
+import { Context } from '@/app/components/ui/Context/Context';
 
 const LoginPage = () => {
+    const { urlApi, setAuth_token } = React.useContext(Context);
     const router = useRouter();
     const [formData, setFormData] = React.useState({
         email: '',
         password: '',
     });
+
     const [errors, setErrors] = React.useState({});
 
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
         setErrors({ ...errors, [e.target.name]: '' });
     };
+    const endpointPost = 'login';// edit
+    const fullUrl = `${urlApi}/${endpointPost}/`;
 
-    const handleSubmit = (e) => {
+
+    const handleSubmit = async (e) => {
         e.preventDefault();
 
         const validationErrors = {};
@@ -37,10 +43,42 @@ const LoginPage = () => {
             return;
         }
 
-        router.push('/month');
+        try {
+            const response = await fetch(fullUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json',
+                },
+                credentials: 'include',
+                body: JSON.stringify({
+                    email: formData.email,
+                    password: formData.password,
+                }),
+            });
+            
+            
+            if (!response.ok) {
+                throw new Error(`Network response was not ok: ${response.status}`);
+            }
+            
+            const data = await response.json();
+            
+            setAuth_token(data.auth_token);
 
-        console.log(formData);
+            setFormData({
+                email: '',
+                password: '',
+            });
+
+            router.push('/month');
+
+        } catch (error) {
+            console.error('Error during POST request:', error.message);
+        }
     };
+
+
     return (
         <section className={styles.loginPage}>
             <MyContainer>
@@ -65,8 +103,10 @@ const LoginPage = () => {
                             onChange={handleChange}
                         />
                         {errors.password && <p className={styles.error}>{errors.password}</p>}
-
-                        <span>Parol esdan chiqdimi ?<Link href="/password-reset     ">Parolni tiklash.</Link></span>
+                        <div>
+                            <h5>Saytda yangimisiz?<Link href="/register">Ro'yxatdan o'tish</Link></h5>
+                            <h5>Parolni unutdingizmi?<Link href="/password-reset">Parolni tiklash</Link></h5>
+                        </div>
                         <button>Kirish</button>
                     </form>
                 </div>

@@ -60,14 +60,20 @@
                 box-shadow: 4px 8px 10px 0px #00000026;
             }
 
-            span {
-                font-size: 16px;
-                font-weight: 600;
-                line-height: 20px;
+            div {
+                display: flex;
+                flex-direction: column;
+                gap: 5px;
 
-                a {
-                    color: #6347EB;
-                    margin-left: 5px;
+                h5 {
+                    font-size: 16px;
+                    font-weight: 600;
+                    line-height: 20px;
+
+                    a {
+                        color: #6347EB;
+                        margin-left: 5px;
+                    }
                 }
             }
         }

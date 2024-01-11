@@ -13,7 +13,7 @@ const PasswordConfirmPage = () => {
     }
 
     const routerRegisterHandle = () => {
-        router.push('/password-reset-form');
+        router.push('/register');
     }
 
 

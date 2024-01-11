@@ -4,8 +4,10 @@ import styles from './PasswordResetPage.module.scss'
 import MyContainer from '@/app/components/ui/MyContainer/MyContainer'
 import passwordResetPageImg from "../../../../../public/image/password-reset.svg"
 import { useRouter } from 'next/router';
+import { Context } from '@/app/components/ui/Context/Context';
 
 const PasswordResetPage = () => {
+    const { urlApi } = React.useContext(Context);
     const router = useRouter();
     const [formData, setFormData] = React.useState({
         email: ''
@@ -17,7 +19,7 @@ const PasswordResetPage = () => {
         setErrors({ ...errors, [e.target.name]: '' });
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
 
         const validationErrors = {};
@@ -31,9 +33,37 @@ const PasswordResetPage = () => {
             return;
         }
 
-        router.push('/password-confirm');
 
-        console.log(formData);
+        const endpointPost = 'password/reset';// edit
+        const fullUrl = `${urlApi}/${endpointPost}/`;
+        try {
+            const response = await fetch(fullUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    email: formData.email,
+                }),
+            });
+
+            setFormData({
+                email: '',
+            });
+
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            } else if (response.ok) {
+                router.push('/password-confirm');
+            }
+
+            const data = await response.json();
+            console.log('Response data:', data);
+
+        } catch (error) {
+            console.error('Error during POST request:', error);
+        }
+
     };
 
     return (

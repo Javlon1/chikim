@@ -1,7 +1,7 @@
 @import "../../../assets/variables";
 
 .generalPage {
-    margin-bottom: 100px;
+    margin-bottom: 150px;
 
     &__items {
         display: flex;
@@ -182,7 +182,7 @@
             &__list1 {
                 display: flex;
                 align-items: center;
-                gap: 7rem;
+                justify-content: space-between;
 
                 &__item {
                     p {
@@ -361,6 +361,22 @@
     width: 200px;
     height: 27px;
     opacity: .7;
+    animation: Skeleton-loading 1s linear infinite alternate;
+}
+
+.skeletonMyCh{
+    border-radius: .4rem;
+    margin-top: 1.5rem;
+    width: 90%;
+    height: 100px;
+    animation: Skeleton-loading 1s linear infinite alternate;
+}
+
+.skeletonCh{
+    border-radius: .4rem;
+    margin-top: 1.5rem;
+    width: 90%;
+    height: 140px;
     animation: Skeleton-loading 1s linear infinite alternate;
 }
 

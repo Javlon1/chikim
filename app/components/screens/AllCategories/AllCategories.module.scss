@@ -1,7 +1,7 @@
 @import "../../../assets/variables";
 
 .allCategories {
-    margin-bottom: 100px;
+    margin-bottom: 150px;
 
     &__items {
         display: flex;
@@ -50,7 +50,7 @@
             &__list1 {
                 display: flex;
                 align-items: center;
-                gap: 7rem;
+                justify-content: space-between;
 
                 &__item {
                     p {
@@ -215,4 +215,23 @@
         }
     }
 
+}
+
+
+.skeleton {
+    margin-top: 1.5rem;
+    border-radius: .4rem;
+    width: 90%;
+    height: 100px;
+    animation: Skeleton-loading 1s linear infinite alternate;
+}
+
+@keyframes Skeleton-loading {
+    0% {
+        background-color: hsl(200, 20%, 70%);
+    }
+
+    100% {
+        background-color: hsl(200, 20%, 95%);
+    }
 }

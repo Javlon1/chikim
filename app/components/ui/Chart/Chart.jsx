@@ -1,6 +1,6 @@
 import React, { useRef, useEffect } from 'react';
 
-const PieChart = ({ price, data }) => {
+const PieChart = ({ total_amount, data }) => {
     const canvasRef = useRef(null);
 
     useEffect(() => {
@@ -14,11 +14,11 @@ const PieChart = ({ price, data }) => {
 
         ctx.clearRect(0, 0, width, height);
 
-        const total = data.reduce((sum, value) => sum + value.price, 0);
+        const total = data.reduce((sum, value) => sum + value.total_amount, 0);
         let startAngle = 0;
 
         data.forEach((value, index) => {
-            const percentage = value.price / total;
+            const percentage = value.total_amount / total;
             const endAngle = startAngle + 2 * Math.PI * percentage;
 
             ctx.beginPath();
@@ -35,7 +35,7 @@ const PieChart = ({ price, data }) => {
         ctx.font = '20px Arial'; // стиль шрифта
         ctx.textAlign = 'center';
         ctx.textBaseline = 'middle';
-        ctx.fillText(price, width / 2, height / 2);
+        ctx.fillText(total_amount, width / 2, height / 2);
     }, [data]);
 
     // Функция для генерации случайного цвета

@@ -2,12 +2,16 @@ import * as React from 'react';
 import styles from './SettingPage.module.scss'
 import MyContainer from '@/app/components/ui/MyContainer/MyContainer'
 import Link from 'next/link';
+import { useRouter } from 'next/router';
+import { Context } from '../../ui/Context/Context';
 
 
 const SettingPage = () => {
+    const router = useRouter();
+    const { urlApi, auth_token } = React.useContext(Context);
     const [errors, setErrors] = React.useState({});
     const [showPicker, setShowPicker] = React.useState(false);
-    const emojis = ['😊', '😂', '😍', '👍', '🎉', '❤️', '🚀', '🌟', '🔥', '🎈', '👍', '🎉', '❤️', '🚀', '🌟',, '👍', '🎉', '❤️', '🚀', '🌟',, '👍', '🎉', '❤️', '🚀', '🌟',, '👍', '🎉', '❤️', '🚀', '🌟',];
+    const emojis = ['🚕', '🚐', '🚄', '👕', '👖', '🧦', '👟', '🕶️', '🍔', '🍞', '🍰', '🍛', '🍎', '🍫', '☕', '🍷', '🍹', '🍶', '🧃', '🎮', '🎤', '⛸️', '🍿', '🎪', '🏋️', '🛌', '🛫', '🎁', '💳', '📲', '📚',];
 
     const [editData, setEditData] = React.useState({
         password: '',
@@ -19,7 +23,7 @@ const SettingPage = () => {
     });
 
     const [selectedEmoji, setSelectedEmoji] = React.useState({
-        name: "",
+        title: "",
         icon: "",
     });
 
@@ -36,7 +40,7 @@ const SettingPage = () => {
         setSelectedEmoji({ ...selectedEmoji, [e.target.name]: e.target.value });
     };
 
-    const editHandle = (e) => {
+    const editHandle = async (e) => {
         e.preventDefault();
 
         const validationErrors = {};
@@ -55,15 +59,71 @@ const SettingPage = () => {
             return;
         }
 
-        console.log(editData);
+        const endpointPost = 'update_password';
+        const fullUrl = `${urlApi}/${endpointPost}/`;
+        try {
+            const response = await fetch(fullUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Token ${auth_token}`,
+                },
+                body: JSON.stringify({
+                    old_password: editData.password,
+                    new_password: editData.change,
+                }),
+            });
+
+            setEditData({
+                password: "",
+                change: "",
+            });
+
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            } else if (response.ok) {
+                router.push('/');
+            }
+
+        } catch (error) {
+            console.error('Error during POST request:', error);
+        }
     };
 
 
-    const limitHandle = (e) => {
+    const limitHandle = async (e) => {
         e.preventDefault();
 
-        console.log(limitData);
+        const endpointPost = 'limit';
+        const fullUrl = `${urlApi}/${endpointPost}/`;
+
+        try {
+            const response = await fetch(fullUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Token ${auth_token}`,
+                },
+                body: JSON.stringify({
+                    limit: limitData.price,
+                }),
+            });
+
+            setLimitData({
+                price: ''
+            });
+
+            if (!response.ok) {
+                throw new Error(`Сетевой ответ не был успешным. Код состояния: ${response.status}`);
+            } else if (response.ok) {
+                router.push('/month');
+            }
+            
+        } catch (error) {
+            console.error('Error during POST request:', error);
+        }
     };
+
 
     const togglePicker = () => {
         setShowPicker(!showPicker);
@@ -74,11 +134,63 @@ const SettingPage = () => {
         togglePicker();
     };
 
-    const iconHandle = (e) => {
+    const iconHandle = async (e) => {
         e.preventDefault();
 
-        console.log(selectedEmoji);
+        const endpointPost = 'category';
+        const fullUrl = `${urlApi}/${endpointPost}/`;
+        try {
+            const response = await fetch(fullUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Token ${auth_token}`,
+                },
+                body: JSON.stringify({
+                    title: selectedEmoji.title,
+                    emoji: selectedEmoji.icon,
+                }),
+            });
+
+            setSelectedEmoji({
+                title: "",
+                icon: "",
+            });
+
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            } else if (response.ok) {
+                router.push('/add');
+            }
+
+        } catch (error) {
+            console.error('Error during POST request:', error);
+        }
     };
+    const logOut = async () => {
+        const endpointPost = 'logout';// edit
+        const fullUrl = `${urlApi}/${endpointPost}/`;
+
+        try {
+            const response = await fetch(fullUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Token ${auth_token}`,
+                },
+            });
+
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            } else if (response.ok) {
+                window.localStorage.removeItem('auth_token');
+                router.push('/');
+            }
+
+        } catch (error) {
+            console.error('Error during POST request:', error);
+        }
+    }
 
     return (
         <section className={styles.settingPage}>
@@ -86,8 +198,14 @@ const SettingPage = () => {
                 <div className={styles.settingPage__items}>
                     <div className={styles.settingPage__items__name}>
                         <h2 className={styles.settingPage__items__name__title}>Sozlamalar</h2>
-                        <span className={styles.settingPage__items__name__add}>
-                            <Link href={`/add`}>+</Link>
+                        <span onClick={logOut} className={styles.settingPage__items__name__add}>
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="30" height="30">
+                                <g fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                    <path d="M15 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2z" />
+                                    <line x1="10" y1="12" x2="20" y2="12" />
+                                    <polyline points="15 7 20 12 15 17" />
+                                </g>
+                            </svg>
                         </span>
                     </div>
                     <h3>Limit belgilash</h3>
@@ -105,9 +223,10 @@ const SettingPage = () => {
                     <form onSubmit={iconHandle} action="#" method="post">
                         <input
                             type="text"
-                            name='name'
+                            name='title'
                             onChange={Emoji}
                             placeholder='Turkum nomi'
+                            value={selectedEmoji ? selectedEmoji.title : ''}
                         />
                         <div className={styles.icon}>
                             <input

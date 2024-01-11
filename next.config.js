@@ -1,11 +1,11 @@
 module.exports = {
-  // Настройки прокси для решения проблем с CORS
   async rewrites() {
     return [
       {
         source: '/api/:path*',
-        destination: 'https://api.example.com/:path*',
+        destination: 'https://17c0fff2630f7e23b56b09b637923e78.serveo.net/:path*',
       },
+
       {
         source: '/:path*',
         destination: '/pageNotFound', // Перенаправляем все остальные запросы на страницу 404
@@ -13,7 +13,6 @@ module.exports = {
     ];
   },
 
-  // Настройки для компонента next/image
   images: {
     domains: ["www.shutterstock.com"], // Домен сайта
   },

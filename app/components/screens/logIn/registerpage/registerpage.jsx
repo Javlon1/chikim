@@ -4,8 +4,10 @@ import { useRouter } from 'next/router';
 import styles from './RegisterPage.module.scss'
 import MyContainer from '@/app/components/ui/MyContainer/MyContainer';
 import registerImg from "../../../../../public/image/register.svg";
+import { Context } from '@/app/components/ui/Context/Context';
 
 const RegisterPage = () => {
+    const { urlApi } = React.useContext(Context);
     const router = useRouter();
     const [formData, setFormData] = React.useState({
         email: '',
@@ -19,7 +21,7 @@ const RegisterPage = () => {
         setErrors({ ...errors, [e.target.name]: '' });
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
 
         const validationErrors = {};
@@ -41,9 +43,35 @@ const RegisterPage = () => {
             return;
         }
 
-        router.push('/register-success');
+        const endpointPost = 'register';// edit
+        const fullUrl = `${urlApi}/${endpointPost}/`;
+        try {
+            const response = await fetch(fullUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    email: formData.email,
+                    password: formData.password,
+                }),
+            });
 
-        console.log(formData);
+            setFormData({
+                email: '',
+                password: '',
+                password2: '',
+            });
+
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            } else if (response.ok) {
+                router.push('/register-success');
+            }
+
+        } catch (error) {
+            console.error('Error during POST request:', error);
+        }
     };
 
     return (

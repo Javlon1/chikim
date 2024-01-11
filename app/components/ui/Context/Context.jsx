@@ -1,12 +1,22 @@
-import { createContext, useState } from 'react'
+import { createContext, useEffect, useState } from 'react'
 const Context = createContext()
 
 function Provider({ children }) {
-    const [url] = useState("https://chikim.vercel.app/api")
-    // const [url] = useState("http://localhost:3000/api")
+    const [urlApi] = useState("https://0dd8aee6247d14.lhr.life/api")
+
+    const [auth_token, setAuth_token] = useState(() => {
+        const auth_token = typeof window !== 'undefined' ? window.localStorage.getItem('auth_token') : null;
+        return auth_token ? auth_token : '';
+    });
+
+    useEffect(() => {
+        if (typeof window !== 'undefined') {
+            window.localStorage.setItem('auth_token', auth_token);
+        }
+    }, [auth_token]);
 
     return (
-        <Context.Provider value={{ url }}>
+        <Context.Provider value={{ urlApi, auth_token, setAuth_token}}>
             {children}
         </Context.Provider>
     )
