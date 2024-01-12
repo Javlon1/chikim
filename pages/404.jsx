@@ -18,6 +18,7 @@ const PageNotFound = () => {
                 <meta property="og:locale" content="ru_RU" />
                 <title>Page Not Found</title>
             </Head>
+
             <div>
                 <NotFound />
             </div>
