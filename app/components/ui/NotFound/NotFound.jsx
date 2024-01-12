@@ -6,7 +6,7 @@ const NotFound = () => {
     const router = useRouter();
 
     const linkHandler = () => {
-        const auth_token = window.localStorage.getItem('auth_token');
+        const auth_token = window.sessionStorage.getItem('auth_token');
 
         if (auth_token > 0) {
             router.push('/general');

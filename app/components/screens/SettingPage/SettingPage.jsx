@@ -183,7 +183,7 @@ const SettingPage = () => {
             if (!response.ok) {
                 throw new Error('Network response was not ok');
             } else if (response.ok) {
-                window.localStorage.removeItem('auth_token');
+                window.sessionStorage.removeItem('auth_token');
                 router.push('/');
             }
 
