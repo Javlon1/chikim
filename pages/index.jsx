@@ -18,7 +18,7 @@ const Index = () => {
                 <meta property="og:type" content="website" />
                 <meta property="og:site_name" content="Chiqimlar" />
                 <meta property="og:locale" content="ru_RU" />
-                <title>Kirish</title>
+                <title>Xarajatlar kirish</title>
             </Head>
 
 
