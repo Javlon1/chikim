@@ -33,6 +33,9 @@ const NotFound = () => {
 };
 
 export const getServerSideProps = async ({ res }) => {
+    // Убедимся, что в заголовке ответа указан Content-Type
+    res.setHeader('Content-Type', 'text/html; charset=utf-8');
+    // Установим статус 404
     res.statusCode = 404;
     return { props: {} };
 };
