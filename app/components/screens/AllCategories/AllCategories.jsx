@@ -7,17 +7,16 @@ import { Context } from '../../ui/Context/Context';
 
 const AllCategories = () => {
     const { urlApi, auth_token } = React.useContext(Context);
-    const [totalPrice, setTotalPrice] = React.useState(0)
+    const [totalPrice, setTotalPrice] = React.useState(0);
     const [chartDataTa, setChartDataTa] = React.useState([]);
 
-
-
-    const redColor = chartDataTa.total_category_amount >= totalPrice ? "red" : ""
+    const redColor = chartDataTa.length >= totalPrice ? "red" : "";
 
     const calculateWidth = (e) => {
         const totalPercentage = (e / totalPrice) * 100;
         return totalPercentage > 100 ? '100%' : `${totalPercentage}%`;
     };
+
     const endpointGetlimit = 'limit';
     const fullUrllimit = `${urlApi}/${endpointGetlimit}/`;
 
@@ -50,7 +49,7 @@ const AllCategories = () => {
         };
 
         fetchData();
-    }, [fullUrllimit]);
+    }, [fullUrllimit, auth_token]);
 
     const endpointGet = 'total_category';
     const fullUrl = `${urlApi}/${endpointGet}/`;
@@ -84,7 +83,7 @@ const AllCategories = () => {
         };
 
         fetchData();
-    }, [fullUrl]);
+    }, [fullUrl, auth_token]);
 
     return (
         <section className={styles.allCategories}>

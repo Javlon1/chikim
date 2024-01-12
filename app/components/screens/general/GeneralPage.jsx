@@ -18,6 +18,7 @@ const GeneralPage = ({ initialChecked = false }) => {
     const [monthData] = React.useState([{ id: 0, month: "Yanvar" }, { id: 1, month: "Fevral" }, { id: 2, month: "Mart" }, { id: 3, month: "Aprel" }, { id: 4, month: "May" }, { id: 5, month: "Iyun" }, { id: 6, month: "Iyul" }, { id: 7, month: "Avgust", }, { id: 8, month: "Sentabr" }, { id: 9, month: "Oktabr" }, { id: 10, month: "Noyabr" }, { id: 11, month: "Dekabr" }]);
     const [totalPrice, setTotalPrice] = React.useState(0)
     const [chartData, setChartData] = React.useState([]);
+    const [expense, setExpense] = React.useState([]);
 
     // 
     const endpointGet = 'limit';
@@ -95,6 +96,42 @@ const GeneralPage = ({ initialChecked = false }) => {
 
     // 
 
+    const endpointGetexpense = 'expense';
+    const fullUrlexpense = `${urlApi}/${endpointGetexpense}/`;
+
+    React.useEffect(() => {
+        const fetchData = async () => {
+            try {
+
+                const urlWithDate = `${fullUrlexpense}?date=${formattedDate}`;
+
+                const response = await fetch(urlWithDate, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Token ${auth_token}`,
+                    },
+                });
+
+                if (!response.ok) {
+                    throw new Error(`Ошибка: ${response.status}`);
+                }
+
+                const data = await response.json();
+
+                if (data) {
+                    setExpense(data);
+                } else {
+                    console.error('Ошибка: Некорректные данные получены от сервера.');
+                }
+            } catch (error) {
+                console.error('Ошибка при запросе данных:', error.message);
+            }
+        };
+
+        fetchData();
+    }, [fullUrl, auth_token, formattedDate]);
+    // 
 
     const handleToggle = () => {
         setChecked(!checked);
@@ -129,7 +166,7 @@ const GeneralPage = ({ initialChecked = false }) => {
         ...item,
         percentage: (item.total_amount / chartData[0].total_category_amount) * 100,
     }));
-
+    
     return (
         <section className={styles.generalPage}>
             <MyContainer>
@@ -198,7 +235,7 @@ const GeneralPage = ({ initialChecked = false }) => {
                         <div className={styles.generalPage__items__Iprice__price}>
                             {
                                 chartData.length > 0 ? (
-                                    <p>{chartData && chartData[0] ? chartData[0].total_category_amount : ''}</p>
+                                    <p>{expense.total_amount}</p>
                                 ) : (
                                     <p className={styles.skeletonPrice}></p>
                                 )

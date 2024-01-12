@@ -34,7 +34,6 @@ const AddPage = () => {
         setErrors({ ...errors, [e.target.name]: '' });
     };
 
-
     const endpointGet = 'category';
     const fullUrl = `${urlApi}/${endpointGet}/`;
 
@@ -54,6 +53,10 @@ const AddPage = () => {
                 }
 
                 const data = await response.json();
+
+                if (!data) {
+                    throw new Error('Неверный формат данных');
+                }
 
                 setdata(data);
 
@@ -84,9 +87,10 @@ const AddPage = () => {
         }
 
         const endpointPost = 'expense';
-        const fullUrl = `${urlApi}/${endpointPost}/`;
+        const postUrl = `${urlApi}/${endpointPost}/`;
+
         try {
-            const response = await fetch(fullUrl, {
+            const response = await fetch(postUrl, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -106,18 +110,17 @@ const AddPage = () => {
                 text2: '',
             });
 
-
             if (!response.ok) {
                 throw new Error('Network response was not ok');
-            } else if (response.ok) {
+            } else {
                 router.push('/month');
             }
 
         } catch (error) {
             console.error('Error during POST request:', error);
         }
-
     };
+
 
     return (
         <section className={styles.addPage}>

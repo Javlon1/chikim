@@ -13,7 +13,7 @@ const MonthPage = () => {
     const [currentDay, setCurrentDay] = React.useState(new Date().getDate());
     const [formattedDate, setFormattedDate] = React.useState(`${currentYear}-${currentMonth.toString().padStart(2, '0')}-${currentDay.toString().padStart(2, '0')}`)
     const [chartData, setChartData] = React.useState([]);
-
+    const [mychart, setMychart] = React.useState([])
 
     const redColor = chartData.total_amount >= totalPrice ? "red" : ""
 
@@ -109,6 +109,43 @@ const MonthPage = () => {
         fetchData();
     }, [fullUrl, auth_token, formattedDate]);
 
+    const endpointGetAll = 'all_expense';
+    const fullUrlAll = `${urlApi}/${endpointGetAll}/`;
+
+    React.useEffect(() => {
+        const fetchData = async () => {
+            try {
+
+                const urlWithDate = `${fullUrlAll}?date=${formattedDate}`;
+
+                const response = await fetch(urlWithDate, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Token ${auth_token}`,
+                    },
+                });
+
+                if (!response.ok) {
+                    throw new Error(`Ошибка: ${response.status}`);
+                }
+
+                const data = await response.json();
+
+                if (data) {
+                    setMychart(data);
+                } else {
+                    console.error('Ошибка: Некорректные данные получены от сервера.');
+                }
+
+            } catch (error) {
+                console.error('Ошибка при запросе данных:', error.message);
+            }
+        };
+
+        fetchData();
+    }, [fullUrlAll, formattedDate]);
+
     return (
         <section className={styles.monthPage}>
             <MyContainer>
@@ -136,7 +173,7 @@ const MonthPage = () => {
                                 <ul className={styles.monthPage__items__used__list1}>
                                     <li className={styles.monthPage__items__used__list1__item}>
                                         <p>Ishlatildi</p>
-                                        <h5>{chartData.total_amount}</h5>
+                                        <h5>{mychart && mychart[0] ? mychart[0].total_category_amount : ''}</h5>
                                     </li>
                                     <li className={styles.monthPage__items__used__list1__item}>
                                         <p>Oylik limit</p>
