@@ -12,14 +12,14 @@ const General = () => {
                 <link rel="icon" href="/favicon.ico" />
                 <meta name="description" content="Ushbu sahifada siz bir oy davomida jami qancha pul sarflaganingizni bilib olasiz." />
                 <meta name="keywords" content="umumiy oylik xarajat" />
-                <meta property="og:title" content="General" />
+                <meta property="og:title" content="umumiy oylik xarajat sahifasi" />
                 <meta property="og:description" content="Ushbu sahifada siz bir oy davomida jami qancha pul sarflaganingizni bilib olasiz." />
                 <meta property="og:image" content="https://chikim.vercel.app/_next/static/media/login.6a615d2d.svg" />
                 <meta property="og:url" content="https://chikim.vercel.app/" />
                 <meta property="og:type" content="website" />
                 <meta property="og:site_name" content="Chiqimlar" />
                 <meta property="og:locale" content="ru_RU" />
-                <title>General</title>
+                <title>umumiy oylik xarajat</title>
             </Head>
 
 

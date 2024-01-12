@@ -18,7 +18,7 @@ const Add = () => {
                 <meta property="og:type" content="website" />
                 <meta property="og:site_name" content="Chiqimlar" />
                 <meta property="og:locale" content="ru_RU" />
-                <title>Add</title>
+                <title>Xarajatlarni qo'shish</title>
             </Head>
 
 

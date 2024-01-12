@@ -11,7 +11,7 @@ const Index = () => {
                 <link rel="icon" href="/favicon.ico" />
                 <meta name="description" content="Siz ushbu sahifada CHIKIM veb-saytiga kirasiz" />
                 <meta name="keywords" content="CHIKIM veb-saytiga kirish" />
-                <meta property="og:title" content="Kirish" />
+                <meta property="og:title" content="Kirish sahifasi" />
                 <meta property="og:description" content="Siz ushbu sahifada CHIKIM veb-saytiga kirasiz" />
                 <meta property="og:image" content="https://chikim.vercel.app/_next/static/media/login.6a615d2d.svg" />
                 <meta property="og:url" content="https://chikim.vercel.app/" />
