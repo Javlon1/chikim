@@ -10,7 +10,7 @@ const NotFound = () => {
     const linkHandler = () => {
         const auth_token = window.localStorage.getItem('auth_token');
 
-        if (auth_token) {
+        if (auth_token > 0) {
             router.push('/general');
         } else {
             router.push('/');
