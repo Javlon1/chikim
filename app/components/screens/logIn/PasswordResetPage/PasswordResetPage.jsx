@@ -70,7 +70,8 @@ const PasswordResetPage = () => {
         <section className={styles.passwordResetPage}>
             <MyContainer>
                 <div className={styles.passwordResetPage__items}>
-                    <h1 className={styles.passwordResetPage__items__name}>Chiqimlar</h1>
+                    <h1>password-reset</h1>
+                    <h2 className={styles.passwordResetPage__items__name}>Chiqimlar</h2>
                     <Image src={passwordResetPageImg} widt={100} height={150} alt="" priority />
                     <p>Parol esdan chiqgan bo’lsa email pochtangizni kiriting biz unga tiklash uchun link yuboramiz.</p>
 

@@ -78,7 +78,8 @@ const RegisterPage = () => {
         <div className={styles.registerPage}>
             <MyContainer>
                 <div className={styles.registerPage__items}>
-                    <h1 className={styles.registerPage__items__name}>Chiqimlar</h1>
+                    <h1>register</h1>
+                    <h2 className={styles.registerPage__items__name}>Chiqimlar</h2>
                     <Image src={registerImg} widt={100} height={150} alt="" priority />
                     <p>Moliyaviy savodingizni oshiring <br /> har oylik chiqimlaringizni nazorat qiling</p>
                     <form onSubmit={handleSubmit} action="#" method="post">
