@@ -197,7 +197,7 @@ const SettingPage = () => {
             <MyContainer>
                 <div className={styles.settingPage__items}>
                     <div className={styles.settingPage__items__name}>
-                        <h2 className={styles.settingPage__items__name__title}>Sozlamalar</h2>
+                        <h1 className={styles.settingPage__items__name__title}>Sozlamalar</h1>
                         <span onClick={logOut} className={styles.settingPage__items__name__add}>
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="30" height="30">
                                 <g fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">

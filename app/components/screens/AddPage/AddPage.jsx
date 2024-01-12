@@ -124,7 +124,7 @@ const AddPage = () => {
             <MyContainer>
                 <div className={styles.addPage__items}>
                     <div className={styles.addPage__items__name}>
-                        <h2 className={styles.addPage__items__name__title}>Chiqim qo’shish</h2>
+                        <h1 className={styles.addPage__items__name__title}>Chiqim qo’shish</h1>
                         <span className={styles.addPage__items__name__add}>
                             <Link href={`/add`}>+</Link>
                         </span>

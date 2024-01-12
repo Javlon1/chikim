@@ -136,7 +136,7 @@ const GeneralPage = ({ initialChecked = false }) => {
                 <div className={styles.generalPage__items}>
 
                     <div className={styles.generalPage__items__name}>
-                        <h2 className={styles.generalPage__items__name__title}>Umumiy statistika</h2>
+                        <h1 className={styles.generalPage__items__name__title}>Umumiy statistika</h1>
                         <span className={styles.generalPage__items__name__add}>
                             <Link href={`/add`}>+</Link>
                         </span>

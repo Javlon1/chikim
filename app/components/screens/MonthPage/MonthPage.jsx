@@ -114,7 +114,7 @@ const MonthPage = () => {
             <MyContainer>
                 <div className={styles.monthPage__items}>
                     <div className={styles.monthPage__items__name}>
-                        <h2 className={styles.monthPage__items__name__title}>Chiqimlar</h2>
+                        <h1 className={styles.monthPage__items__name__title}>Chiqimlar</h1>
                         <span className={styles.monthPage__items__name__add}>
                             <Link href={`/add`}>+</Link>
                         </span>
