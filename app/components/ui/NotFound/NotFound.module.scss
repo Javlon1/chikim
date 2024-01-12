@@ -64,7 +64,10 @@
                 }
             }
         }
-
+        &__message{
+            color: #fff;
+            text-align: center;
+        }
         &__link {
             position: absolute;
             bottom: -25%;
