@@ -1,8 +1,19 @@
 import * as React from 'react'
 import Head from 'next/head'
 import PasswordResetFormPage from '@/app/components/screens/logIn/PasswordResetFormPage/PasswordResetFormPage';
+import { useRouter } from 'next/router';
+import { Context } from '@/app/components/ui/Context/Context';
 
 const PasswordResetForm = () => {
+    const router = useRouter();
+    const { auth_token } = React.useContext(Context);
+
+    React.useEffect(() => {
+
+        if (!auth_token) {
+            router.replace('/');
+        }
+    }, []);
 
     return (
         <>

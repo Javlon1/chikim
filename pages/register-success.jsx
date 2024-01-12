@@ -1,8 +1,19 @@
 import * as React from 'react'
 import Head from 'next/head'
 import RegisterSuccessPage from '@/app/components/screens/logIn/RegisterSuccessPage/RegisterSuccessPage';
+import { useRouter } from 'next/router';
+import { Context } from '@/app/components/ui/Context/Context';
 
 const RegisterSuccess = () => {
+    const router = useRouter();
+    const { auth_token } = React.useContext(Context);
+
+    React.useEffect(() => {
+
+        if (!auth_token) {
+            router.replace('/');
+        }
+    }, []);
 
     return (
         <>
