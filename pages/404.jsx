@@ -1,4 +1,5 @@
 import NotFound from '@/app/components/ui/NotFound/NotFound';
+import Head from 'next/head';
 
 const PageNotFound = () => {
 
