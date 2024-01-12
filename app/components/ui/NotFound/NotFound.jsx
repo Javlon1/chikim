@@ -4,11 +4,15 @@ import styles from './NotFound.module.scss';
 
 const NotFound = () => {
     const router = useRouter();
+    const [auth_token, setAuth_token] = React.useState([])
+
+    React.useEffect(() => {
+        const auth_token = window.sessionStorage.getItem('auth_token');
+        setAuth_token(auth_token)
+    }, [])
 
     const linkHandler = () => {
-        const auth_token = window.sessionStorage.getItem('auth_token');
-
-        if (auth_token > 0) {
+        if (auth_token) {
             router.push('/general');
         } else {
             router.push('/');
