@@ -8,14 +8,21 @@ import Link from 'next/link';
 import { Context } from '@/app/components/ui/Context/Context';
 
 const LoginPage = () => {
-    const { urlApi, setAuth_token } = React.useContext(Context);
+    const { urlApi, setAuth_token, auth_token } = React.useContext(Context);
     const router = useRouter();
     const [formData, setFormData] = React.useState({
         email: '',
         password: '',
     });
 
+    React.useEffect(() => {
+
+        if (!auth_token) {
+            router.replace('/');
+        }
+    }, []);
     const [errors, setErrors] = React.useState({});
+    const [errorsData, setErrorsData] = React.useState({});
 
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -57,28 +64,27 @@ const LoginPage = () => {
                 }),
             });
 
-
-            if (!response.ok) {
-                throw new Error(`Network response was not ok: ${response.status}`);
-            }
-
             const data = await response.json();
 
             setAuth_token(data.auth_token);
+            setErrorsData(data)
 
             setFormData({
                 email: '',
                 password: '',
             });
 
-            router.push('/month');
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            } else if (errorsData.error !== undefined) {
+                router.push('/month');
+            }
 
         } catch (error) {
             console.error('Error during POST request:', error.message);
         }
     };
     // 
-
     const handleButtonClick = (e) => {
         let x = e.clientX - e.target.offsetLeft;
         let y = e.clientY - e.target.offsetTop;
@@ -92,7 +98,6 @@ const LoginPage = () => {
             ripples.remove();
         }, 1000);
     }
-
     // 
 
     return (
@@ -103,6 +108,7 @@ const LoginPage = () => {
                     <Image src={loginImg} widt={100} height={150} alt="" priority />
                     <form onSubmit={handleSubmit} action="#" method="post">
                         <h3>Kirish</h3>
+                        {errorsData.error && <p className={styles.error}>{errorsData.error}</p>}
                         <input
                             name="email"
                             type="email"

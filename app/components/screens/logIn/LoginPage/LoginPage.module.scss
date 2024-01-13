@@ -1,6 +1,7 @@
 @import "../../../../assets/variables";
 
 .loginPage {
+    padding: 50px 0 100px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -96,12 +97,13 @@
 }
 
 @keyframes ripples {
-    0%{
+    0% {
         width: 0px;
         height: 0px;
         opacity: .5;
     }
-    100%{
+
+    100% {
         width: 500px;
         height: 500px;
         opacity: 0;

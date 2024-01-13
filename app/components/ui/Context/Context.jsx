@@ -2,7 +2,7 @@ import { createContext, useEffect, useState } from 'react'
 const Context = createContext()
 
 function Provider({ children }) {
-    const [urlApi] = useState("https://fullstackyordam.uz/api")
+    const [urlApi] = useState("http://fullstackyordam.uz/api")
 
     const [auth_token, setAuth_token] = useState(() => {
         const auth_token = typeof window !== 'undefined' ? window.sessionStorage.getItem('auth_token') : null;

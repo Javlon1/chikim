@@ -8,6 +8,7 @@ import { Context } from '@/app/components/ui/Context/Context';
 
 const RegisterPage = () => {
     const { urlApi } = React.useContext(Context);
+    const [errorsData, setErrorsData] = React.useState("");
     const router = useRouter();
     const [formData, setFormData] = React.useState({
         email: '',
@@ -57,11 +58,16 @@ const RegisterPage = () => {
                 }),
             });
 
+            const data = await response.json();
+
+            setErrorsData(data.error)
+
             setFormData({
                 email: '',
                 password: '',
-                password2: '', 
+                password2: '',
             });
+
 
             if (!response.ok) {
                 throw new Error('Network response was not ok');
@@ -88,7 +94,6 @@ const RegisterPage = () => {
         }, 1000);
     }
 
-
     return (
         <div className={styles.registerPage}>
             <MyContainer>
@@ -99,6 +104,7 @@ const RegisterPage = () => {
                     <p>Moliyaviy savodingizni oshiring <br /> har oylik chiqimlaringizni nazorat qiling</p>
                     <form onSubmit={handleSubmit} action="#" method="post">
                         <h3>Ro’yhatdan o’tish</h3>
+                        {errorsData && <p>{errorsData}</p>}
                         <input
                             name="email"
                             type="email"
