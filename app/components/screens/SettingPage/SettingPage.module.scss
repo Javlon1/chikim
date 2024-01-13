@@ -69,16 +69,17 @@
                 box-shadow: 4px 8px 10px 0px #00000026;
                 position: relative;
                 overflow: hidden;
+
+                span {
+                    position: absolute;
+                    background-color: $white;
+                    transform: translate(-50%, -50%);
+                    pointer-events: none;
+                    border-radius: 50%;
+                    animation: ripples 1s linear infinite;
+                }
             }
 
-            span {
-                position: absolute;
-                background-color: $white;
-                transform: translate(-50%, -50%);
-                pointer-events: none;
-                border-radius: 50%;
-                animation: ripples 1s linear infinite;
-            }
         }
     }
 }

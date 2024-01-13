@@ -21,16 +21,17 @@ const LoginPage = () => {
             router.replace('/');
         }
     }, []);
+
     const [errors, setErrors] = React.useState({});
-    const [errorsData, setErrorsData] = React.useState({});
 
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
         setErrors({ ...errors, [e.target.name]: '' });
     };
-    const endpointPost = 'login';// edit
-    const fullUrl = `${urlApi}/${endpointPost}/`;
 
+    const [errorsData, setErrorsData] = React.useState({});
+    const endpointPost = 'login'; // edit
+    const fullUrl = `${urlApi}/${endpointPost}/`;
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -46,7 +47,7 @@ const LoginPage = () => {
         }
 
         if (Object.keys(validationErrors).length > 0) {
-            setErrors(validationErrors);
+            setErrorsData(validationErrors);
             return;
         }
 
@@ -55,7 +56,7 @@ const LoginPage = () => {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Accept': 'application/json',
+                    Accept: 'application/json',
                 },
                 credentials: 'include',
                 body: JSON.stringify({
@@ -67,23 +68,26 @@ const LoginPage = () => {
             const data = await response.json();
 
             setAuth_token(data.auth_token);
-            setErrorsData(data)
+            setErrorsData((prevData) => ({ ...prevData, ...data }));
 
             setFormData({
                 email: '',
                 password: '',
             });
 
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            } else if (errorsData.error !== undefined) {
+            if (response.ok && data.error === undefined) {
                 router.push('/month');
+            } else if (!response.ok) {
+                throw new Error(`Network response was not ok: ${response.statusText}`);
             }
-
         } catch (error) {
-            console.error('Error during POST request:', error.message);
+            console.error('Error during POST request:', error);
         }
     };
+
+
+    console.log(errorsData.error);
+
     // 
     const handleButtonClick = (e) => {
         let x = e.clientX - e.target.offsetLeft;
