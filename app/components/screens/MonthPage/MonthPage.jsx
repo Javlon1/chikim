@@ -21,7 +21,7 @@ const MonthPage = () => {
     React.useEffect(() => {
 
         if (!auth_token) {
-            router.replace('/');
+            router.replace('/'); 
         }
     }, []);
 
