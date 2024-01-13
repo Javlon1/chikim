@@ -56,14 +56,14 @@ const LoginPage = () => {
                     password: formData.password,
                 }),
             });
-            
-            
+
+
             if (!response.ok) {
                 throw new Error(`Network response was not ok: ${response.status}`);
             }
-            
+
             const data = await response.json();
-            
+
             setAuth_token(data.auth_token);
 
             setFormData({
@@ -77,7 +77,21 @@ const LoginPage = () => {
             console.error('Error during POST request:', error.message);
         }
     };
+    // 
+    const handleButtonClick = (e) => {
+        let x = e.clientX - e.target.offsetLeft;
+        let y = e.clientY - e.target.offsetTop;
 
+        let ripples = document.createElement("span");
+        ripples.style.left = x + "px";
+        ripples.style.top = y + "px";
+        e.target.appendChild(ripples);
+
+        setTimeout(() => {
+            ripples.remove();
+        }, 1000);
+    }
+    // 
 
     return (
         <section className={styles.loginPage}>
@@ -107,7 +121,7 @@ const LoginPage = () => {
                             <h5>Saytda yangimisiz?<Link href="/register">Ro'yxatdan o'tish</Link></h5>
                             <h5>Parolni unutdingizmi?<Link href="/password-reset">Parolni tiklash</Link></h5>
                         </div>
-                        <button>Kirish</button>
+                        <button onClick={handleButtonClick}>Kirish</button>
                     </form>
                 </div>
             </MyContainer>
