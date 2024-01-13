@@ -4,21 +4,31 @@ import styles from './GeneralPage.module.scss'
 import MyContainer from '@/app/components/ui/MyContainer/MyContainer'
 import { Context } from '../../ui/Context/Context';
 import PieChart from '../../ui/Chart/Chart';
+import { useRouter } from 'next/router';
 
 const GeneralPage = ({ initialChecked = false }) => {
     const { urlApi, auth_token } = React.useContext(Context);
     const [checked, setChecked] = React.useState(initialChecked);
-
+    
     const [selectedDay, setSelectedDay] = React.useState(new Date().getDate());
     const [selectedMonth, setSelectedMonth] = React.useState(new Date().getMonth());
     const [selectedYear] = React.useState(new Date().getFullYear());
-
+    
     const [formattedDate, setFormattedDate] = React.useState(`${selectedYear}-${selectedMonth + 1}-${selectedDay}`)
-
+    
     const [monthData] = React.useState([{ id: 0, month: "Yanvar" }, { id: 1, month: "Fevral" }, { id: 2, month: "Mart" }, { id: 3, month: "Aprel" }, { id: 4, month: "May" }, { id: 5, month: "Iyun" }, { id: 6, month: "Iyul" }, { id: 7, month: "Avgust", }, { id: 8, month: "Sentabr" }, { id: 9, month: "Oktabr" }, { id: 10, month: "Noyabr" }, { id: 11, month: "Dekabr" }]);
     const [totalPrice, setTotalPrice] = React.useState(0)
     const [chartData, setChartData] = React.useState([]);
     const [expense, setExpense] = React.useState([]);
+    
+    const router = useRouter();
+
+    React.useEffect(() => {
+
+        if (!auth_token) {
+            router.replace('/');
+        }
+    }, []);
 
     // 
     const endpointGet = 'limit';
@@ -242,7 +252,7 @@ const GeneralPage = ({ initialChecked = false }) => {
                             }
                         </div>
                     </div>
-
+ 
                     {
                         chartData.length > 0 ? (
                             <div className={styles.generalPage__items__used}>

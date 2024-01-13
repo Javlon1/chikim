@@ -3,6 +3,7 @@ import styles from './MonthPage.module.scss'
 import MyContainer from '@/app/components/ui/MyContainer/MyContainer'
 import Link from 'next/link';
 import { Context } from '../../ui/Context/Context';
+import { useRouter } from 'next/router';
 
 
 const MonthPage = () => {
@@ -15,8 +16,16 @@ const MonthPage = () => {
     const [chartData, setChartData] = React.useState([]);
     const [mychart, setMychart] = React.useState([])
 
-    const redColor = chartData.total_amount >= totalPrice ? "red" : ""
+    const router = useRouter();
 
+    React.useEffect(() => {
+
+        if (!auth_token) {
+            router.replace('/');
+        }
+    }, []);
+
+    const redColor = chartData.total_amount >= totalPrice ? "red" : ""
 
     const calculateWidth = (e) => {
         const totalPercentage = (e / totalPrice) * 100;

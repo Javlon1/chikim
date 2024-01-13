@@ -12,6 +12,13 @@ const SettingPage = () => {
     const [showPicker, setShowPicker] = React.useState(false);
     const emojis = ['🚕', '🚐', '🚄', '👕', '👖', '🧦', '👟', '🕶️', '🍔', '🍞', '🍰', '🍛', '🍎', '🍫', '☕', '🍷', '🍹', '🍶', '🧃', '🎮', '🎤', '⛸️', '🍿', '🎪', '🏋️', '🛌', '🛫', '🎁', '💳', '📲', '📚','💊'];
 
+    React.useEffect(() => {
+
+        if (!auth_token) {
+            router.replace('/');
+        }
+    }, []);
+    
     const [editData, setEditData] = React.useState({
         password: '',
         change: '',

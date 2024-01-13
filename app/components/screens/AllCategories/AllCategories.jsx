@@ -3,6 +3,7 @@ import Link from 'next/link'
 import styles from './AllCategories.module.scss'
 import MyContainer from '@/app/components/ui/MyContainer/MyContainer'
 import { Context } from '../../ui/Context/Context';
+import { useRouter } from 'next/router';
 
 
 const AllCategories = () => {
@@ -10,6 +11,15 @@ const AllCategories = () => {
     const [totalPrice, setTotalPrice] = React.useState(0);
     const [chartDataTa, setChartDataTa] = React.useState([]);
 
+    const router = useRouter();
+
+    React.useEffect(() => {
+
+        if (!auth_token) {
+            router.replace('/');
+        }
+    }, []);
+    
     const redColor = chartDataTa.length >= totalPrice ? "red" : "";
 
     const calculateWidth = (e) => {

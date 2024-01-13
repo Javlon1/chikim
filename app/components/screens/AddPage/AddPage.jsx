@@ -10,6 +10,13 @@ const AddPage = () => {
     const { urlApi, auth_token } = React.useContext(Context);
     const [data, setdata] = React.useState([]);
 
+    React.useEffect(() => {
+
+        if (!auth_token) {
+            router.replace('/');
+        }
+    }, []);
+    
     const [formData, setFormData] = React.useState({
         сhiqim: '',
         text1: '',
