@@ -24,7 +24,7 @@
             justify-content: space-between;
 
             &__title {
-                font-size: 18px;
+                font-size: 26px;
                 font-weight: 700;
                 line-height: 28px;
                 color: $black;
@@ -61,14 +61,14 @@
                 &__item {
                     p {
                         color: #908BA6;
-                        font-size: 14px;
+                        font-size: 17px;
                         font-weight: 500;
                         text-align: start;
                     }
 
                     h5 {
                         color: #2C2646;
-                        font-size: 18px;
+                        font-size: 22px;
                         font-weight: 500;
                         margin-top: .2rem;
                     }
@@ -166,7 +166,7 @@
         &__title {
             margin: 1.2rem 0;
             color: $black;
-            font-size: 18px;
+            font-size: 22px;
             font-weight: 700;
         }
 
@@ -205,14 +205,14 @@
                         }
 
                         .etit {
-                            font-size: 1rem;
+                            font-size: 17px;
                             font-weight: 600;
                             color: $black;
                         }
                     }
 
                     p {
-                        font-size: 14px;
+                        font-size: 17px;
                         font-weight: 600;
                         color: $black;
                     }

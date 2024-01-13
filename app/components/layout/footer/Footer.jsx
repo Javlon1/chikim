@@ -4,7 +4,7 @@ import MyContainer from '../../ui/MyContainer/MyContainer'
 import styles from './Footer.module.scss'
 import Head from 'next/head';
 
-
+ 
 const Footer = () => {
     const { pathname } = useRouter();
 

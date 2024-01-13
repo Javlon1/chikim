@@ -1,8 +1,6 @@
 import * as React from 'react'
 import Head from 'next/head'
 import PasswordResetPage from '@/app/components/screens/logIn/PasswordResetPage/PasswordResetPage';
-import { useRouter } from 'next/router';
-import { Context } from '@/app/components/ui/Context/Context';
 
 const PasswordReset = () => {
 

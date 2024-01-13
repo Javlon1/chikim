@@ -1,8 +1,6 @@
 import * as React from 'react'
 import Head from 'next/head'
 import PasswordResetFormPage from '@/app/components/screens/logIn/PasswordResetFormPage/PasswordResetFormPage';
-import { useRouter } from 'next/router';
-import { Context } from '@/app/components/ui/Context/Context';
 
 const PasswordResetForm = () => {
 

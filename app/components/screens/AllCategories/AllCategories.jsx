@@ -89,8 +89,8 @@ const AllCategories = () => {
         <section className={styles.allCategories}>
             <MyContainer>
                 <div className={styles.allCategories__items}>
+                    <h1>categories</h1>
                     <div className={styles.allCategories__items__name}>
-                        <h1>categories</h1>
                         <h2 className={styles.allCategories__items__name__title}>Chiqimlar</h2>
                         <span className={styles.allCategories__items__name__add}>
                             <Link href={`/add`}>+</Link>

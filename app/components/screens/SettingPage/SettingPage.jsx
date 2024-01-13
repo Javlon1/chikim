@@ -1,8 +1,7 @@
 import * as React from 'react';
+import { useRouter } from 'next/router';
 import styles from './SettingPage.module.scss'
 import MyContainer from '@/app/components/ui/MyContainer/MyContainer'
-import Link from 'next/link';
-import { useRouter } from 'next/router';
 import { Context } from '../../ui/Context/Context';
 
 
