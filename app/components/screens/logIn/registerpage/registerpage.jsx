@@ -60,7 +60,7 @@ const RegisterPage = () => {
             setFormData({
                 email: '',
                 password: '',
-                password2: '',
+                password2: '', 
             });
 
             if (!response.ok) {

@@ -24,30 +24,28 @@
         }
 
         &__name {
-            position: absolute;
-            top: 1.5rem;
-            font-size: 18px;
+            margin: .1rem 0 1rem;
+            font-size: 26px;
             font-weight: 700;
             line-height: 28px;
             color: $black;
         }
 
         p {
-            margin: 1rem 0;
-            font-size: 12px;
+            font-size: 14px;
             font-weight: 500;
             line-height: 18px;
         }
 
         form {
-            height: 300px;
             display: flex;
             align-items: center;
-            justify-content: space-between;
             flex-direction: column;
+            gap: 1.3rem;
 
             h3 {
-                font-size: 18px;
+                margin: 1rem 0;
+                font-size: 22px;
                 font-weight: 700;
                 color: $black;
             }
