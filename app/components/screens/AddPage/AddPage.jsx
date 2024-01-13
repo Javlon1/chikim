@@ -128,6 +128,19 @@ const AddPage = () => {
         }
     };
 
+    const handleButtonClick = (e) => {
+        let x = e.clientX - e.target.offsetLeft;
+        let y = e.clientY - e.target.offsetTop;
+
+        let ripples = document.createElement("span");
+        ripples.style.left = x + "px";
+        ripples.style.top = y + "px";
+        e.target.appendChild(ripples);
+
+        setTimeout(() => {
+            ripples.remove();
+        }, 1000);
+    }
 
     return (
         <section className={styles.addPage}>
@@ -143,7 +156,7 @@ const AddPage = () => {
                     <form onSubmit={handleSubmit} action="#" method="post">
                         <div className={styles.dropdown}>
                             <p onClick={toggleDropdown}>
-                                <span>{selectedItem ? `${selectedItem.emoji} ${selectedItem.title}` : 'Chiqim turkumi'}</span>
+                                <b>{selectedItem ? `${selectedItem.emoji} ${selectedItem.title}` : 'Chiqim turkumi'}</b>
                                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path
                                         d="M13.51 15.2001L15.48 13.2301L18.69 10.0201C19.36 9.34005 18.88 8.18005 17.92 8.18005L11.69 8.18005L6.07995 8.18005C5.11995 8.18005 4.63995 9.34005 5.31995 10.0201L10.5 15.2001C11.32 16.0301 12.68 16.0301 13.51 15.2001Z"
@@ -159,8 +172,8 @@ const AddPage = () => {
 
                                                 data.map((item, index) => (
                                                     <li key={index} onClick={() => handleItemClick(item)}>
-                                                        <span>{item.emoji}</span>
-                                                        <span>{item.title}</span>
+                                                        <b>{item.emoji}</b>
+                                                        <b>{item.title}</b>
                                                     </li>
                                                 ))
 
@@ -190,7 +203,7 @@ const AddPage = () => {
                             value={formData.text2}
                             onChange={handleChange}
                         />
-                        <button>Qo’shish</button>
+                        <button onClick={handleButtonClick}>Qo’shish</button>
                     </form>
                 </div>
             </MyContainer>

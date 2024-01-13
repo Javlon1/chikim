@@ -74,6 +74,21 @@ const RegisterPage = () => {
         }
     };
 
+    const handleButtonClick = (e) => {
+        let x = e.clientX - e.target.offsetLeft;
+        let y = e.clientY - e.target.offsetTop;
+
+        let ripples = document.createElement("span");
+        ripples.style.left = x + "px";
+        ripples.style.top = y + "px";
+        e.target.appendChild(ripples);
+
+        setTimeout(() => {
+            ripples.remove();
+        }, 1000);
+    }
+
+
     return (
         <div className={styles.registerPage}>
             <MyContainer>
@@ -108,7 +123,7 @@ const RegisterPage = () => {
                             onChange={handleChange}
                         />
                         {errors.password2 && <p className={styles.error}>{errors.password2}</p>}
-                        <button>Ro’yhatdan o’tish</button>
+                        <button onClick={handleButtonClick}>Ro’yhatdan o’tish</button>
                     </form>
                 </div>
             </MyContainer>

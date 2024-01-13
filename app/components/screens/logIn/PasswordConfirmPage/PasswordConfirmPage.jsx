@@ -16,6 +16,19 @@ const PasswordConfirmPage = () => {
         router.push('/register');
     }
 
+    const handleButtonClick = (e) => {
+        let x = e.clientX - e.target.offsetLeft;
+        let y = e.clientY - e.target.offsetTop;
+
+        let ripples = document.createElement("span");
+        ripples.style.left = x + "px";
+        ripples.style.top = y + "px";
+        e.target.appendChild(ripples);
+
+        setTimeout(() => {
+            ripples.remove();
+        }, 1000);
+    }
 
     return (
         <section className={styles.passwordConfirmPage}>
@@ -24,8 +37,14 @@ const PasswordConfirmPage = () => {
                     <h1 className={styles.passwordConfirmPage__items__name}>Chiqimlar</h1>
                     <Image src={passwordConfirmPageImg} widt={100} height={150} alt="" priority />
                     <p>Parolni tiklash uchun biz pochtangizga xabar yubordik iltimos pochta qutingizni tekshiring !</p>
-                    <button onClick={routerHandle}>Kirish</button>
-                    <button onClick={routerRegisterHandle}>Ro’yhatdan o’tish</button>
+                    <button onClick={() => {
+                        routerHandle()
+                        handleButtonClick()
+                    }}>Kirish</button>
+                    <button onClick={() => {
+                        routerRegisterHandle()
+                        handleButtonClick()
+                    }}>Ro’yhatdan o’tish</button>
                 </div>
             </MyContainer>
         </section>

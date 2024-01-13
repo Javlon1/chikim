@@ -97,8 +97,8 @@
                         background-color: #6347EB;
                         box-shadow: 4px 4px 8px 0px #00000026;
 
-                        span {
-                            font-size: 12px;
+                        b {
+                            font-size: 14px;
                             font-weight: 600;
                             color: #fff;
                         }
@@ -138,9 +138,20 @@
                 color: #fff;
                 background: #6347EB;
                 box-shadow: 4px 8px 10px 0px #00000026;
+                position: relative;
+                overflow: hidden;
             }
 
             span {
+                position: absolute;
+                background-color: $white;
+                transform: translate(-50%, -50%);
+                pointer-events: none;
+                border-radius: 50%;
+                animation: ripples 1s linear infinite;
+            }
+
+            b {
                 font-size: 16px;
                 font-weight: 600;
                 line-height: 20px;
@@ -168,5 +179,19 @@
 
     100% {
         background-color: hsl(200, 20%, 95%);
+    }
+}
+
+@keyframes ripples {
+    0% {
+        width: 0px;
+        height: 0px;
+        opacity: .5;
+    }
+
+    100% {
+        width: 500px;
+        height: 500px;
+        opacity: 0;
     }
 }

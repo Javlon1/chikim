@@ -67,6 +67,17 @@
                 color: #fff;
                 background: #6347EB;
                 box-shadow: 4px 8px 10px 0px #00000026;
+                position: relative;
+                overflow: hidden;
+            }
+
+            span {
+                position: absolute;
+                background-color: $white;
+                transform: translate(-50%, -50%);
+                pointer-events: none;
+                border-radius: 50%;
+                animation: ripples 1s linear infinite;
             }
         }
     }
@@ -83,7 +94,7 @@
         cursor: pointer;
     }
 
-    span {
+    b {
         width: 24px;
         height: 24px;
         display: flex;
@@ -97,7 +108,8 @@
         border: 2px solid #292D32;
         right: 0;
         cursor: pointer;
-        p{
+
+        p {
             padding: 0;
             margin: 0;
         }
@@ -120,7 +132,7 @@
     background-color: #fff;
     box-shadow: 0px 8px 10px 0px #00000026;
 
-    span {
+    b {
         display: flex;
         align-items: center;
         justify-content: center;
@@ -131,5 +143,20 @@
 
         cursor: pointer;
         font-size: 19px;
+    }
+}
+
+
+@keyframes ripples {
+    0% {
+        width: 0px;
+        height: 0px;
+        opacity: .5;
+    }
+
+    100% {
+        width: 500px;
+        height: 500px;
+        opacity: 0;
     }
 }

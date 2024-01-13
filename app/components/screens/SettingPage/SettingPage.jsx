@@ -10,7 +10,7 @@ const SettingPage = () => {
     const { urlApi, auth_token } = React.useContext(Context);
     const [errors, setErrors] = React.useState({});
     const [showPicker, setShowPicker] = React.useState(false);
-    const emojis = ['🚕', '🚐', '🚄', '👕', '👖', '🧦', '👟', '🕶️', '🍔', '🍞', '🍰', '🍛', '🍎', '🍫', '☕', '🍷', '🍹', '🍶', '🧃', '🎮', '🎤', '⛸️', '🍿', '🎪', '🏋️', '🛌', '🛫', '🎁', '💳', '📲', '📚','💊'];
+    const emojis = ['🚕', '🚐', '🚄', '👕', '👖', '🧦', '👟', '🕶️', '🍔', '🍞', '🍰', '🍛', '🍎', '🍫', '☕', '🍷', '🍹', '🍶', '🧃', '🎮', '🎤', '⛸️', '🍿', '🎪', '🏋️', '🛌', '🛫', '🎁', '💳', '📲', '📚', '💊'];
 
     React.useEffect(() => {
 
@@ -18,7 +18,7 @@ const SettingPage = () => {
             router.replace('/');
         }
     }, []);
-    
+
     const [editData, setEditData] = React.useState({
         password: '',
         change: '',
@@ -124,7 +124,7 @@ const SettingPage = () => {
             } else if (response.ok) {
                 router.push('/month');
             }
-            
+
         } catch (error) {
             console.error('Error during POST request:', error);
         }
@@ -198,13 +198,27 @@ const SettingPage = () => {
         }
     }
 
+    const handleButtonClick = (e) => {
+        let x = e.clientX - e.target.offsetLeft;
+        let y = e.clientY - e.target.offsetTop;
+
+        let ripples = document.createElement("span");
+        ripples.style.left = x + "px";
+        ripples.style.top = y + "px";
+        e.target.appendChild(ripples);
+
+        setTimeout(() => {
+            ripples.remove();
+        }, 1000);
+    }
+
     return (
         <section className={styles.settingPage}>
             <MyContainer>
                 <div className={styles.settingPage__items}>
                     <div className={styles.settingPage__items__name}>
                         <h1 className={styles.settingPage__items__name__title}>Sozlamalar</h1>
-                        <span onClick={logOut} className={styles.settingPage__items__name__add}>
+                        <b onClick={logOut} className={styles.settingPage__items__name__add}>
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="30" height="30">
                                 <g fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                                     <path d="M15 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2z" />
@@ -212,7 +226,7 @@ const SettingPage = () => {
                                     <polyline points="15 7 20 12 15 17" />
                                 </g>
                             </svg>
-                        </span>
+                        </b>
                     </div>
                     <h3>Limit belgilash</h3>
                     <form onSubmit={limitHandle} action="#" method="post">
@@ -222,8 +236,9 @@ const SettingPage = () => {
                             placeholder='Bu oy uchun limitni kiriting'
                             value={limitData.price}
                             onChange={limit}
+                            required
                         />
-                        <button>Saqlash</button>
+                        <button onClick={handleButtonClick}>Saqlash</button>
                     </form>
                     <h3>Turkum qo’shish</h3>
                     <form onSubmit={iconHandle} action="#" method="post">
@@ -232,6 +247,7 @@ const SettingPage = () => {
                             name='title'
                             onChange={Emoji}
                             placeholder='Turkum nomi'
+                            required
                             value={selectedEmoji ? selectedEmoji.title : ''}
                         />
                         <div className={styles.icon}>
@@ -242,44 +258,45 @@ const SettingPage = () => {
                                 onChange={Emoji}
                                 placeholder='Icon'
                                 readOnly
+                                required
                                 value={selectedEmoji ? selectedEmoji.icon : ''}
                             />
 
-                            <span onClick={togglePicker}>
+                            <b onClick={togglePicker}>
                                 <p>+</p>
-                            </span>
+                            </b>
                         </div>
                         {showPicker && (
                             <div className={styles.emoji__picker}>
                                 {emojis.map((emoji, index) => (
-                                    <span key={index} onClick={() => handleEmojiClick(emoji)}>
+                                    <b key={index} onClick={() => handleEmojiClick(emoji)}>
                                         {emoji}
-                                    </span>
+                                    </b>
                                 ))}
                             </div>
                         )}
 
-                        <button>Saqlash</button>
+                        <button onClick={handleButtonClick}>Saqlash</button>
                     </form>
                     <h3>Kirish kodini o’zgartirish</h3>
                     <form action="#" onSubmit={editHandle} method="post">
                         <input
                             name="password"
-                            type="number"
                             placeholder='Eski kod'
                             value={editData.password}
                             onChange={editPassowrd}
+                            required
                         />
                         {errors.password && <p className={styles.error}>{errors.password}</p>}
                         <input
                             name="change"
-                            type="number"
                             placeholder='Yangi kod '
                             value={editData.change}
                             onChange={editPassowrd}
+                            required
                         />
                         {errors.change && <p className={styles.error}>{errors.change}</p>}
-                        <button>Saqlash</button>
+                        <button onClick={handleButtonClick}>Saqlash</button>
                     </form>
                 </div>
             </MyContainer>

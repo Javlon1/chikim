@@ -18,7 +18,7 @@ const RegisterSuccessPage = () => {
                 <div className={styles.registerSuccessPage__items}>
                     <h1 className={styles.registerSuccessPage__items__name}>Chiqimlar</h1>
                     <Image src={registerSuccessImg} widt={100} height={150} alt="" priority />
-                    <p>Siz muvaffaqiyatli ro’yhatdan o’tdingiz ilovaga kirish uchun quyidagi tugnmani bosing !</p>
+                    <p>Siz muvaffaqiyatli ro’yhatdan o’tdingiz ilovaga kirish uchun quyidagi tugmani bosing !</p>
                     <button onClick={routerHandle}>Kirish</button>
                 </div>
             </MyContainer>
