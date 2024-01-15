@@ -16,7 +16,7 @@ const LoginPage = () => {
     });
 
     React.useEffect(() => {
-        setAuth_token("")
+
         if (auth_token && auth_token !== "") {
             router.replace('/month');
         }
