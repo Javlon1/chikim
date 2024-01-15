@@ -13,6 +13,7 @@ const MonthPage = () => {
     const [currentMonth, setCurrentMonth] = React.useState(new Date().getMonth() + 1);
     const [currentDay, setCurrentDay] = React.useState(new Date().getDate());
     const [formattedDate, setFormattedDate] = React.useState(`${currentYear}-${currentMonth.toString().padStart(2, '0')}-${currentDay.toString().padStart(2, '0')}`)
+    const [thisday] = React.useState(`${new Date().getFullYear()}-${(new Date().getMonth() + 1).toString().padStart(2, '0')}-${new Date().getDate()}`)
     const [chartData, setChartData] = React.useState([]);
     const [mychart, setMychart] = React.useState([])
 
@@ -21,7 +22,7 @@ const MonthPage = () => {
     React.useEffect(() => {
 
         if (!auth_token) {
-            router.replace('/'); 
+            router.replace('/');
         }
     }, []);
 
@@ -177,61 +178,61 @@ const MonthPage = () => {
                         }
                     </div>
                     {
-                        chartData.expense_history ? (
-                            <div className={styles.monthPage__items__used}>
-                                <ul className={styles.monthPage__items__used__list1}>
-                                    <li className={styles.monthPage__items__used__list1__item}>
-                                        <p>Ishlatildi</p>
-                                        <h5>{mychart && mychart[0] ? mychart[0].total_category_amount : ''}</h5>
-                                    </li>
-                                    <li className={styles.monthPage__items__used__list1__item}>
-                                        <p>Oylik limit</p>
-                                        <h5>{totalPrice}</h5>
-                                    </li>
-                                </ul>
-                                <ul className={styles.monthPage__items__used__list2}>
-                                    {
-                                        chartData.expense_history?.map((e, i) => (
-                                            <li
-                                                key={i}
-                                                className={styles.monthPage__items__used__list2__item}
-                                                style={{
-                                                    width: calculateWidth(e.amount),
-                                                    backgroundColor: redColor,
-                                                }}
-                                            ></li>
-                                        ))
-                                    }
-                                </ul>
-                            </div>
+
+                        formattedDate <= thisday ? (
+                            chartData.expense_history ? (
+                                <>
+                                    <div className={styles.monthPage__items__used}>
+                                        <ul className={styles.monthPage__items__used__list1}>
+                                            <li className={styles.monthPage__items__used__list1__item}>
+                                                <p>Ishlatildi</p>
+                                                <h5>{mychart && mychart[0] ? mychart[0].total_category_amount : ''}</h5>
+                                            </li>
+                                            <li className={styles.monthPage__items__used__list1__item}>
+                                                <p>Oylik limit</p>
+                                                <h5>{totalPrice}</h5>
+                                            </li>
+                                        </ul>
+                                        <ul className={styles.monthPage__items__used__list2}>
+                                            {
+                                                chartData.expense_history?.map((e, i) => (
+                                                    <li
+                                                        key={i}
+                                                        className={styles.monthPage__items__used__list2__item}
+                                                        style={{
+                                                            width: calculateWidth(e.amount),
+                                                            backgroundColor: redColor,
+                                                        }}
+                                                    ></li>
+                                                ))
+                                            }
+                                        </ul>
+                                    </div>
+
+                                    <div className={styles.monthPage__items__result}>
+                                        <h3>So’ngi chiqimlar</h3>
+                                        <ul className={styles.monthPage__items__result__list}>
+                                            {
+                                                chartData.expense_history?.map((e, i) => (
+                                                    <li key={i} className={styles.monthPage__items__result__list__item}>
+                                                        <div>
+                                                            <span className={styles.emoji}>{e.category__emoji}</span>
+                                                            <span className={styles.etit}>{e.category__title}</span>
+                                                        </div>
+                                                        <p>{e.amount}</p>
+                                                    </li>
+                                                ))
+                                            }
+                                        </ul>
+                                    </div>
+                                </>
+                            ) : (
+                                <p className={styles.skeletonMyCha}></p>
+                            )
                         ) : (
-                            <p className={styles.skeletonMyCha}></p>
+                            <b style={{ color: "#2C2646", marginTop: "1rem", fontSize: "17px" }}>{formattedDate} sanadagi <br /> Ma'lumot mavjud emas</b>
                         )
                     }
-
-                    <div className={styles.monthPage__items__result}>
-                        <h3>So’ngi chiqimlar</h3>
-                        {
-                            chartData.expense_history ? (
-                                <ul className={styles.monthPage__items__result__list}>
-                                    {
-                                        chartData.expense_history?.map((e, i) => (
-                                            <li key={i} className={styles.monthPage__items__result__list__item}>
-                                                <div>
-                                                    <span className={styles.emoji}>{e.category__emoji}</span>
-                                                    <span className={styles.etit}>{e.category__title}</span>
-                                                </div>
-                                                <p>{e.amount}</p>
-                                            </li>
-                                        ))
-                                    }
-                                </ul>
-                            ) : (
-                                <p className={styles.skeletonItem}></p>
-                            )
-                        }
-                    </div>
-
                 </div>
             </MyContainer>
         </section>

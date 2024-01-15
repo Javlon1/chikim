@@ -9,18 +9,17 @@ import { useRouter } from 'next/router';
 const GeneralPage = ({ initialChecked = false }) => {
     const { urlApi, auth_token } = React.useContext(Context);
     const [checked, setChecked] = React.useState(initialChecked);
-    
     const [selectedDay, setSelectedDay] = React.useState(new Date().getDate());
     const [selectedMonth, setSelectedMonth] = React.useState(new Date().getMonth());
     const [selectedYear] = React.useState(new Date().getFullYear());
-    
     const [formattedDate, setFormattedDate] = React.useState(`${selectedYear}-${selectedMonth + 1}-${selectedDay}`)
-    
+    const [thisday] = React.useState(`${new Date().getFullYear()}-${new Date().getMonth() + 1}-${new Date().getDate()}`)
+
     const [monthData] = React.useState([{ id: 0, month: "Yanvar" }, { id: 1, month: "Fevral" }, { id: 2, month: "Mart" }, { id: 3, month: "Aprel" }, { id: 4, month: "May" }, { id: 5, month: "Iyun" }, { id: 6, month: "Iyul" }, { id: 7, month: "Avgust", }, { id: 8, month: "Sentabr" }, { id: 9, month: "Oktabr" }, { id: 10, month: "Noyabr" }, { id: 11, month: "Dekabr" }]);
     const [totalPrice, setTotalPrice] = React.useState(0)
     const [chartData, setChartData] = React.useState([]);
     const [expense, setExpense] = React.useState([]);
-    
+
     const router = useRouter();
 
     React.useEffect(() => {
@@ -176,7 +175,7 @@ const GeneralPage = ({ initialChecked = false }) => {
         ...item,
         percentage: (item.total_amount / chartData[0].total_category_amount) * 100,
     }));
-    
+
     return (
         <section className={styles.generalPage}>
             <MyContainer>
@@ -252,63 +251,62 @@ const GeneralPage = ({ initialChecked = false }) => {
                             }
                         </div>
                     </div>
- 
                     {
-                        chartData.length > 0 ? (
-                            <div className={styles.generalPage__items__used}>
-                                <ul className={styles.generalPage__items__used__list1}>
-                                    <li className={styles.generalPage__items__used__list1__item}>
-                                        <p>Ishlatildi</p>
-                                        <h5>{chartData && chartData[0] ? chartData[0].total_category_amount : ''}</h5>
-                                    </li>
-                                    <li className={styles.generalPage__items__used__list1__item}>
-                                        <p>Oylik limit</p>
-                                        <h5>{totalPrice}</h5>
-                                    </li>
-                                </ul>
-                                <ul className={styles.generalPage__items__used__list2}>
-                                    {
-                                        chartData?.map((e, i) => (
-                                            <li
-                                                key={i}
-                                                className={styles.generalPage__items__used__list2__item}
-                                                style={{
-                                                    width: calculateWidth(e.total_amount),
-                                                    backgroundColor: redColor,
-                                                }}
-                                            ></li>
-                                        ))
-                                    }
-                                </ul>
-                            </div>
-                        ) : (
-                            <p className={styles.skeletonMyCh}></p>
-                        )
-                    }
 
-                    {
-                        chartData.length > 0 ? (
-                            <div className={styles.generalPage__items__chart}>
-                                <p className={styles.generalPage__items__chart__title}>Turkumlar ko’rinishida</p>
-                                <div className={styles.generalPage__items__chart__item}>
-                                    <PieChart total_amount={chartData.length > 0 ? chartData[0].total_category_amount : 0} data={chartData} />
-                                    <ul className={styles.generalPage__items__chart__item__list}>
-                                        {chartDataWithPercentage.map((item, index) => (
-                                            <li className={styles.generalPage__items__chart__item__list__item} key={index}>
-                                                <p>{item.category_emoji}</p>
-                                                <p>
-                                                    {`${item.percentage.toFixed(2)}%`}
-                                                </p>
+                        formattedDate <= thisday ? (
+                            chartData.length > 0 ? (
+                                <>
+                                    <div className={styles.generalPage__items__used}>
+                                        <ul className={styles.generalPage__items__used__list1}>
+                                            <li className={styles.generalPage__items__used__list1__item}>
+                                                <p>Ishlatildi</p>
+                                                <h5>{chartData && chartData[0] ? chartData[0].total_category_amount : ''}</h5>
                                             </li>
-                                        ))}
-                                    </ul>
-                                </div>
-                            </div>
+                                            <li className={styles.generalPage__items__used__list1__item}>
+                                                <p>Oylik limit</p>
+                                                <h5>{totalPrice}</h5>
+                                            </li>
+                                        </ul>
+                                        <ul className={styles.generalPage__items__used__list2}>
+                                            {
+                                                chartData?.map((e, i) => (
+                                                    <li
+                                                        key={i}
+                                                        className={styles.generalPage__items__used__list2__item}
+                                                        style={{
+                                                            width: calculateWidth(e.total_amount),
+                                                            backgroundColor: redColor,
+                                                        }}
+                                                    ></li>
+                                                ))
+                                            }
+                                        </ul>
+                                    </div>
+
+                                    <div className={styles.generalPage__items__chart}>
+                                        <p className={styles.generalPage__items__chart__title}>Turkumlar ko’rinishida</p>
+                                        <div className={styles.generalPage__items__chart__item}>
+                                            <PieChart total_amount={chartData.length > 0 ? chartData[0].total_category_amount : 0} data={chartData} />
+                                            <ul className={styles.generalPage__items__chart__item__list}>
+                                                {chartDataWithPercentage.map((item, index) => (
+                                                    <li className={styles.generalPage__items__chart__item__list__item} key={index}>
+                                                        <p>{item.category_emoji}</p>
+                                                        <p>
+                                                            {`${item.percentage.toFixed(2)}%`}
+                                                        </p>
+                                                    </li>
+                                                ))}
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </>
+                            ) : (
+                                <p className={styles.skeletonMyCh}></p>
+                            )
                         ) : (
-                            <p className={styles.skeletonCh}></p>
+                            <b style={{ color: "#2C2646", marginTop: "1rem", fontSize:"17px" }}>Ma'lumot mavjud emas</b>
                         )
                     }
-
                 </div>
             </MyContainer>
         </section >

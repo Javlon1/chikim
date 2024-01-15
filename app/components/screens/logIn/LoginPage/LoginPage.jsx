@@ -47,7 +47,7 @@ const LoginPage = () => {
         }
 
         if (Object.keys(validationErrors).length > 0) {
-            setErrorsData(validationErrors);
+            setErrors(validationErrors);
             return;
         }
 

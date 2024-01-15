@@ -1,18 +1,5 @@
 .myContainer{
-    width: 440px;
+    width: 350px;
     margin: 0 auto;
     padding: 0 12px;
-}
-
-@media (max-width: 768px) {
-    .myContainer {
-        width: 440px;
-    }
-}
-
-
-@media (max-width: 576px) {
-    .myContainer {
-        width: 100%;
-    }
 }
