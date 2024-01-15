@@ -16,9 +16,11 @@ const LoginPage = () => {
     });
 
     React.useEffect(() => {
+        setAuth_token("")
         if (auth_token && auth_token !== "") {
             router.replace('/month');
         }
+
     }, [auth_token]);
     console.log(auth_token);
     const [errors, setErrors] = React.useState({});
