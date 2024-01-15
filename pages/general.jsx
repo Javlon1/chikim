@@ -1,8 +1,5 @@
-import * as React from 'react'
 import Head from 'next/head'
 import GeneralPage from '@/app/components/screens/general/GeneralPage';
-import { useRouter } from 'next/router';
-import { Context } from '@/app/components/ui/Context/Context';
 
 
 const General = () => {

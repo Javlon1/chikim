@@ -1,4 +1,3 @@
-import * as React from 'react'
 import Head from 'next/head'
 import PasswordConfirmPage from '@/app/components/screens/logIn/PasswordConfirmPage/PasswordConfirmPage';
 

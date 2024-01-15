@@ -1,4 +1,3 @@
-import * as React from 'react'
 import Head from 'next/head'
 import RegisterSuccessPage from '@/app/components/screens/logIn/RegisterSuccessPage/RegisterSuccessPage';
 

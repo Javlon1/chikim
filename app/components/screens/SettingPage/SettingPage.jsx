@@ -7,7 +7,7 @@ import { Context } from '../../ui/Context/Context';
 
 const SettingPage = () => {
     const router = useRouter();
-    const { urlApi, auth_token } = React.useContext(Context);
+    const { urlApi, auth_token, setAuth_token } = React.useContext(Context);
     const [errors, setErrors] = React.useState({});
     const [showPicker, setShowPicker] = React.useState(false);
     const emojis = ['🚕', '🚐', '🚄', '🛩️', '👕', '👖', '🧦', '👟', '🕶️', '🥩', '🍗', '🍔', '🍞', '🍰', '🍛', '🍱', '🍎', '🍫', '☕', '🍷', '🍹', '🍶', '🧃', '🧸', '🛒', '🎮', '🎤', '⛸️', '🍿', '🎪', '🏋️', '🛌', '💍', '🎁', '💳', '📲', '📚', '💊', '🏦', '🍽️'];
@@ -122,7 +122,7 @@ const SettingPage = () => {
             if (!response.ok) {
                 throw new Error(`Сетевой ответ не был успешным. Код состояния: ${response.status}`);
             } else if (response.ok) {
-                router.push('/month');
+                router.push('/');
             }
 
         } catch (error) {
@@ -173,8 +173,9 @@ const SettingPage = () => {
             console.error('Error during POST request:', error);
         }
     };
+
     const logOut = async () => {
-        const endpointPost = 'logout';// edit
+        const endpointPost = 'logout';
         const fullUrl = `${urlApi}/${endpointPost}/`;
 
         try {
@@ -188,10 +189,12 @@ const SettingPage = () => {
 
             if (!response.ok) {
                 throw new Error('Network response was not ok');
-            } else if (response.ok) {
-                window.sessionStorage.removeItem('auth_token');
-                router.push('/');
             }
+
+            window.localStorage.removeItem('auth_token');
+            setAuth_token(''); 
+
+            router.push('/');
 
         } catch (error) {
             console.error('Error during POST request:', error);

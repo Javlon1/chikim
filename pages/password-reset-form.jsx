@@ -1,4 +1,3 @@
-import * as React from 'react'
 import Head from 'next/head'
 import PasswordResetFormPage from '@/app/components/screens/logIn/PasswordResetFormPage/PasswordResetFormPage';
 

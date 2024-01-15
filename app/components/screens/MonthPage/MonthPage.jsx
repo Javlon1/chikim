@@ -24,7 +24,8 @@ const MonthPage = () => {
         if (!auth_token) {
             router.replace('/');
         }
-    }, []);
+
+    }, [router]);
 
     const redColor = chartData.total_amount >= totalPrice ? "red" : ""
 
