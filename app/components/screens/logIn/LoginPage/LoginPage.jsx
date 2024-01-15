@@ -85,9 +85,6 @@ const LoginPage = () => {
         }
     };
 
-
-    console.log(errorsData.error);
-
     // 
     const handleButtonClick = (e) => {
         let x = e.clientX - e.target.offsetLeft;
