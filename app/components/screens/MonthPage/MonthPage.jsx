@@ -27,6 +27,8 @@ const MonthPage = () => {
 
     }, [router]);
 
+    console.log(auth_token);
+    
     const redColor = chartData.total_amount >= totalPrice ? "red" : ""
 
     const calculateWidth = (e) => {

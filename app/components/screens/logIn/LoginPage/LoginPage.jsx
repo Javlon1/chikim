@@ -20,7 +20,7 @@ const LoginPage = () => {
             router.replace('/month');
         }
     }, [auth_token]);
-
+    console.log(auth_token);
     const [errors, setErrors] = React.useState({});
 
     const handleChange = (e) => {
