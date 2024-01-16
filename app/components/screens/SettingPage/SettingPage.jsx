@@ -180,6 +180,8 @@ const SettingPage = () => {
 
         window.localStorage.removeItem('auth_token');
 
+        setAuth_token("")
+
         router.push('/');
 
         try {
@@ -193,6 +195,8 @@ const SettingPage = () => {
             if (response.ok) {
 
                 window.localStorage.removeItem('auth_token');
+
+                setAuth_token("")
 
                 router.push('/');
 
