@@ -273,14 +273,11 @@ const SettingPage = () => {
                             />
 
                             <b onClick={togglePicker}>
-
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 100 100">
                                     <circle cx="50" cy="50" r="40" fill="none" stroke="black" strokeWidth="8" />
                                     <line x1="20" y1="50" x2="80" y2="50" stroke="black" strokeWidth="8" />
                                     <line x1="50" y1="20" x2="50" y2="80" stroke="black" strokeWidth="8" />
                                 </svg>
-
-
                             </b>
                         </div>
                         {showPicker && (
@@ -292,7 +289,6 @@ const SettingPage = () => {
                                 ))}
                             </div>
                         )}
-
                         <button onClick={handleButtonClick}>Saqlash</button>
                     </form>
                     <h3>Kirish kodini o’zgartirish</h3>
