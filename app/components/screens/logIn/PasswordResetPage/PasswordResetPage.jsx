@@ -47,13 +47,13 @@ const PasswordResetPage = () => {
                 }),
             });
 
-            setFormData({
-                email: '',
-            });
 
             if (!response.ok) {
                 throw new Error('Network response was not ok');
             } else if (response.ok) {
+                setFormData({
+                    email: '',
+                });
                 router.push('/password-confirm');
             }
 
