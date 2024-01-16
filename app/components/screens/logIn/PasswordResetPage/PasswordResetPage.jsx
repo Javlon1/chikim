@@ -34,7 +34,7 @@ const PasswordResetPage = () => {
         }
 
 
-        const endpointPost = 'password/reset';// edit
+        const endpointPost = 'reset_password';// edit
         const fullUrl = `${urlApi}/${endpointPost}/`;
         try {
             const response = await fetch(fullUrl, {

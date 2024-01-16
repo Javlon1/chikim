@@ -17,12 +17,12 @@ const LoginPage = () => {
 
     React.useEffect(() => {
 
-        if (auth_token && auth_token !== "") {
+        if (auth_token) {
             router.replace('/month');
         }
 
     }, [auth_token]);
-    console.log(auth_token);
+
     const [errors, setErrors] = React.useState({});
 
     const handleChange = (e) => {
@@ -68,15 +68,18 @@ const LoginPage = () => {
 
             const data = await response.json();
 
-            setAuth_token(data.auth_token);
             setErrorsData((prevData) => ({ ...prevData, ...data }));
+            
+            console.log(data.success)
+            
+            if (data.success) {
 
-            setFormData({
-                email: '',
-                password: '',
-            });
+                setAuth_token(data.auth_token);
+                setFormData({
+                    email: '',
+                    password: '',
+                });
 
-            if (response.ok && data.error === undefined) {
                 router.push('/month');
             } else if (!response.ok) {
                 throw new Error(`Network response was not ok: ${response.statusText}`);

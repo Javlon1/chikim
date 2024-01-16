@@ -178,6 +178,10 @@ const SettingPage = () => {
         const endpointPost = 'logout';
         const fullUrl = `${urlApi}/${endpointPost}/`;
 
+        window.localStorage.removeItem('auth_token');
+
+        router.push('/');
+
         try {
             const response = await fetch(fullUrl, {
                 method: 'POST',
@@ -186,15 +190,15 @@ const SettingPage = () => {
                     'Authorization': `Token ${auth_token}`,
                 },
             });
+            if (response.ok) {
 
-            if (!response.ok) {
+                window.localStorage.removeItem('auth_token');
+
+                router.push('/');
+
+            } else if (!response.ok) {
                 throw new Error('Network response was not ok');
             }
-
-            window.localStorage.removeItem('auth_token');
-            setAuth_token('');
-
-            router.push('/');
 
         } catch (error) {
             console.error('Error during POST request:', error);

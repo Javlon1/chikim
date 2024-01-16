@@ -1,10 +1,9 @@
-import { useRouter } from 'next/router';
 import { createContext, useEffect, useState } from 'react';
 
 const Context = createContext();
 
 function Provider({ children }) {
-    const router = useRouter();
+    
     const [urlApi] = useState("https://dj.inexoplast.uz/api");
 
     const [auth_token, setAuth_token] = useState(() => {
@@ -14,8 +13,9 @@ function Provider({ children }) {
         return '';
     });
 
+    
     useEffect(() => {
-        if (typeof window !== 'undefined') {
+        if (typeof window !== 'undefined' && auth_token !== '') {
             window.localStorage.setItem('auth_token', auth_token);
         }
     }, [auth_token]);
