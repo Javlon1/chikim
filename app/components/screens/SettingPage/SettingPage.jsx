@@ -10,6 +10,7 @@ const SettingPage = () => {
     const { urlApi, auth_token, setAuth_token } = React.useContext(Context);
     const [errors, setErrors] = React.useState({});
     const [showPicker, setShowPicker] = React.useState(false);
+    const [amount, setAmount] = React.useState('');
     const emojis = ['🚕', '🚐', '🚄', '🛩️', "💇", '👕', '👖', '🧦', '👟', '🕶️', '🥩', '🍗', '🍔', '🍞', '🍰', '🍛', '🍱', '🍎', '🍫', '☕', '🍷', '🍹', '🍶', '🧃', '🧸', '🛒', '🏊‍♂️', '🎮', '🎤', '⛸️', '🍿', '🎪', '🏋️', '💍', '🎁', '💳', '📲', '📚', '💊', '🏦', '🍽️', '🦷'];
 
     React.useEffect(() => {
@@ -38,8 +39,19 @@ const SettingPage = () => {
         setErrors({ ...errors, [e.target.name]: '' });
     };
 
+    const handleInputChange = (e) => {
+        const inputValue = e.target.value.replace(/\D/g, ''); // Удаляем все нецифровые символы
+        const formattedValue = formatCurrency(inputValue);
+        setAmount(formattedValue);
+    };
+ 
+    const formatCurrency = (value) => {
+        return new Intl.NumberFormat('en-US').format(Number(value));
+    };
+
     const limit = (e) => {
-        setLimitData({ ...limitData, price: e.target.value });
+        const amountWithoutCommas = amount.replace(/,/g, '');
+        setLimitData({ ...limitData, price: amountWithoutCommas });
     };
 
     const Emoji = (e) => {
@@ -221,6 +233,8 @@ const SettingPage = () => {
         setTimeout(() => {
             ripples.remove();
         }, 1000);
+
+        limit()
     }
 
     return (
@@ -242,10 +256,9 @@ const SettingPage = () => {
                     <form onSubmit={limitHandle} action="#" method="post">
                         <input
                             name="limit"
-                            type="number"
                             placeholder='Bu oy uchun limitni kiriting'
-                            value={limitData.price}
-                            onChange={limit}
+                            value={amount}
+                            onChange={handleInputChange}
                             required
                         />
                         <button onClick={handleButtonClick}>Saqlash</button>
