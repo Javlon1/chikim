@@ -187,7 +187,12 @@ const MonthPage = () => {
                                         <ul className={styles.monthPage__items__used__list1}>
                                             <li className={styles.monthPage__items__used__list1__item}>
                                                 <p>Ishlatildi</p>
-                                                <h5>{Math.round(mychart[0].total_category_amount).toLocaleString("en-US").replace(/,/g, " ")}{" "}</h5>
+                                                <h5>
+                                                    {mychart && mychart.length > 0 && mychart[0].total_category_amount !== undefined
+                                                        ? Math.round(mychart[0].total_category_amount).toLocaleString("en-US").replace(/,/g, " ")
+                                                        : "Недоступно"
+                                                    }
+                                                </h5>
                                             </li>
                                             <li className={styles.monthPage__items__used__list1__item}>
                                                 <p>Oylik limit</p>
