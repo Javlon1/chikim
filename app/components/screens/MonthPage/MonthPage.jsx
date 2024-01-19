@@ -172,7 +172,7 @@ const MonthPage = () => {
                         <input type="date" value={formattedDate} onChange={handleDateChange} />
                         {
                             chartData.expense_history ? (
-                                <h3>{chartData.total_amount}</h3>
+                                <h3>{Math.round(chartData.total_amount).toLocaleString("en-US").replace(/,/g, " ")}{" "}</h3>
                             ) : (
                                 <p className={styles.skeletonPrice}></p>
                             )
@@ -187,11 +187,11 @@ const MonthPage = () => {
                                         <ul className={styles.monthPage__items__used__list1}>
                                             <li className={styles.monthPage__items__used__list1__item}>
                                                 <p>Ishlatildi</p>
-                                                <h5>{mychart && mychart[0] ? mychart[0].total_category_amount : ''}</h5>
+                                                <h5>{Math.round(mychart[0].total_category_amount).toLocaleString("en-US").replace(/,/g, " ")}{" "}</h5>
                                             </li>
                                             <li className={styles.monthPage__items__used__list1__item}>
                                                 <p>Oylik limit</p>
-                                                <h5>{totalPrice}</h5>
+                                                <h5>{Math.round(totalPrice).toLocaleString("en-US").replace(/,/g, " ")}{" "}</h5>
                                             </li>
                                         </ul>
                                         <ul className={styles.monthPage__items__used__list2}>
@@ -220,7 +220,7 @@ const MonthPage = () => {
                                                             <span className={styles.emoji}>{e.category__emoji}</span>
                                                             <span className={styles.etit}>{e.category__title}</span>
                                                         </div>
-                                                        <p>{e.amount}</p>
+                                                        <p>{Math.round(e.amount).toLocaleString("en-US").replace(/,/g, " ")}{" "}</p>
                                                     </li>
                                                 ))
                                             }

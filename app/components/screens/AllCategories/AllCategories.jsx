@@ -112,11 +112,11 @@ const AllCategories = () => {
                                 <ul className={styles.allCategories__items__used__list1}>
                                     <li className={styles.allCategories__items__used__list1__item}>
                                         <p>Ishlatildi</p>
-                                        <h5>{chartDataTa && chartDataTa[0] ? chartDataTa[0].total_category_amount : ''}</h5>
+                                        <h5>{Math.round(chartDataTa[0].total_category_amount).toLocaleString("en-US").replace(/,/g, " ")}{" "}</h5>
                                     </li>
                                     <li className={styles.allCategories__items__used__list1__item}>
                                         <p>Oylik limit</p>
-                                        <h5>{totalPrice}</h5>
+                                        <h5>{Math.round(totalPrice).toLocaleString("en-US").replace(/,/g, " ")}{" "}</h5>
                                     </li>
                                 </ul>
                                 <ul className={styles.allCategories__items__used__list2}>

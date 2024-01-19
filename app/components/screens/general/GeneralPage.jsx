@@ -244,7 +244,7 @@ const GeneralPage = ({ initialChecked = false }) => {
                         <div className={styles.generalPage__items__Iprice__price}>
                             {
                                 chartData.length > 0 ? (
-                                    <p>{expense.total_amount}</p>
+                                    <p>{Math.round(expense.total_amount).toLocaleString("en-US").replace(/,/g, " ")}{" "}</p>
                                 ) : (
                                     <p className={styles.skeletonPrice}></p>
                                 )
@@ -260,11 +260,11 @@ const GeneralPage = ({ initialChecked = false }) => {
                                         <ul className={styles.generalPage__items__used__list1}>
                                             <li className={styles.generalPage__items__used__list1__item}>
                                                 <p>Ishlatildi</p>
-                                                <h5>{chartData && chartData[0] ? chartData[0].total_category_amount : ''}</h5>
+                                                <h5>{Math.round(chartData[0].total_category_amount).toLocaleString("en-US").replace(/,/g, " ")}{" "}</h5>
                                             </li>
                                             <li className={styles.generalPage__items__used__list1__item}>
                                                 <p>Oylik limit</p>
-                                                <h5>{totalPrice}</h5>
+                                                <h5>{Math.round(totalPrice).toLocaleString("en-US").replace(/,/g, " ")}{" "}</h5>
                                             </li>
                                         </ul>
                                         <ul className={styles.generalPage__items__used__list2}>
